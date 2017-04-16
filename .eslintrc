@@ -26,7 +26,7 @@ rules:
     new-parens: 2
     no-alert: 2
     no-caller: 2
-    no-catch-shadow: 2
+    no-catch-shadow: 0
     no-console: 0
     no-else-return: 2
     no-eq-null: 2

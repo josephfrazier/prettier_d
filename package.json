@@ -30,6 +30,8 @@
   "dependencies": {
     "camelcase-keys": "^4.1.0",
     "chalk": "^1.1.1",
+    "json-align": "^0.1.0",
+    "json-stable-stringify": "^1.0.1",
     "minimist": "^1.2.0",
     "optionator": "^0.8.1",
     "prettier": "^1.1.0",
