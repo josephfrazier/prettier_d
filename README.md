@@ -91,7 +91,7 @@ This runs `prettier` even faster!
 
 ## Compatibility
 
-- `0.0.x`: prettier ^1.0.0
+- `5.0.0`: prettier ^1.0.0
 
 ## License
 
