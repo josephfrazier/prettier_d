@@ -36,8 +36,8 @@
     "unquote": "^1.1.0"
   },
   "files": [
-    "bin",
-    "lib",
+    "bin/**",
+    "lib/**",
     "LICENSE",
     "README.md"
   ],
