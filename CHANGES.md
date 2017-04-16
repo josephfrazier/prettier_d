@@ -1,5 +1,20 @@
 # Changes
 
+## 5.0.0
+
+Rename project to prettier_d.js, run [prettier] instead of eslint. Note that no options are currently supported, only simple usage like:
+
+```bash
+prettier_d file.js # prints formatted file to stdout
+
+# moar speed
+PORT=`cat ~/.prettier_d | cut -d" " -f1`
+TOKEN=`cat ~/.prettier_d | cut -d" " -f2`
+echo "$TOKEN $PWD file.js" | nc localhost $PORT
+```
+
+[prettier]: https://github.com/prettier/prettier
+
 ## 4.2.5
 
 Add `.vimrc` example for buffer auto-fixing to README.

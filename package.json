@@ -1,14 +1,16 @@
 {
-  "name": "eslint_d",
+  "name": "prettier_d",
   "version": "4.2.5",
-  "description": "Makes eslint the fastest linter on the planet",
-  "bin": "bin/eslint_d.js",
+  "description": "Makes prettier the fastest formatter on the planet",
+  "bin": "bin/prettier_d.js",
   "keywords": [
-    "eslint",
+    "eslint_d",
+    "prettier",
     "lint"
   ],
-  "author": "Maximilian Antoni <mail@maxantoni.de> (http://maxantoni.de/)",
+  "author": "Joseph Frazier <1212jtraceur@gmail.com>",
   "contributors": [
+    "Maximilian Antoni <mail@maxantoni.de> (http://maxantoni.de/)",
     "Richard Herrera <rich@doctyper.com>",
     "Kevin Yue <yuezk001@gmail.com>",
     "Roger Zurawicki <roger@krypton.io>",
@@ -17,18 +19,18 @@
     "Nick Hwang <nhwang@hubspot.com>",
     "Aaron Jensen <aaronjensen@gmail.com>"
   ],
-  "homepage": "https://github.com/mantoni/eslint_d.js",
+  "homepage": "https://github.com/josephfrazier/prettier_d.js",
   "scripts": {
     "test": "eslint ."
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mantoni/eslint_d.js.git"
+    "url": "https://github.com/josephfrazier/prettier_d.js.git"
   },
   "dependencies": {
     "chalk": "^1.1.1",
-    "eslint": "^3.0.0",
     "optionator": "^0.8.1",
+    "prettier": "^1.1.0",
     "resolve": "^1.1.7",
     "supports-color": "^3.1.2"
   },
@@ -38,5 +40,8 @@
     "LICENSE",
     "README.md"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  }
 }

@@ -12,8 +12,8 @@ if (cmd === 'start') {
 
 } else if (cmd === '-v' || cmd === '--version') {
 
-  console.log('v%s (eslint_d v%s)',
-    require('eslint/package.json').version,
+  console.log('v%s (prettier_d v%s)',
+    require('prettier/package.json').version,
     require('../package.json').version);
 
 } else if (cmd === '-h' || cmd === '--help') {
