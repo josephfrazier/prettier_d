@@ -28,7 +28,9 @@
     "url": "https://github.com/josephfrazier/prettier_d.js.git"
   },
   "dependencies": {
+    "camelcase-keys": "^4.1.0",
     "chalk": "^1.1.1",
+    "minimist": "^1.2.0",
     "optionator": "^0.8.1",
     "prettier": "^1.1.0",
     "resolve": "^1.1.7",

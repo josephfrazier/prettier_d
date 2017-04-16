@@ -62,13 +62,11 @@ Available commands:
 - `stop`: stop the server
 - `status`: print out whether the server is currently running
 - `restart`: restart the server
-- <strike>`[options] file.js`</strike> `file.js`: invoke `prettier` <strike>with the given options.</strike>
+- `[options] file.js` `file.js`: invoke `prettier` with the given options.
   The `prettier` engine will be created in the current directory. If the server
   is not yet running, it is started.
 
-<strike>
 Type `prettier_d --help` to see the supported `prettier` options.
-</strike>
 
 `prettier_d` will select a free port automatically and store the port number
 along with an access token in `~/.prettier_d`.
