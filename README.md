@@ -93,6 +93,14 @@ This runs `prettier` even faster!
 
 - `5.0.0`: prettier ^1.0.0
 
+## Limitations
+
+A few `prettier` options are not currently supported:
+
+* `--write`
+* `--list-different`
+* `--color`
+
 ## License
 
 MIT
