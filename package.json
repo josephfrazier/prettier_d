@@ -1,6 +1,6 @@
 {
   "name": "prettier_d",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "Makes prettier the fastest formatter on the planet",
   "bin": "bin/prettier_d.js",
   "keywords": [
