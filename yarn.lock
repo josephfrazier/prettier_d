@@ -711,9 +711,9 @@ prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
 
-prettier@^1.1.0:
+"prettier@https://github.com/prettier/prettier":
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.1.0.tgz#9d6ad005703efefa66b6999b8916bfc6afeaf9f8"
+  resolved "https://github.com/prettier/prettier#8d03423d17ffe4190a0b5207433e87e7a3d7b2d4"
   dependencies:
     ast-types "0.9.8"
     babel-code-frame "6.22.0"
