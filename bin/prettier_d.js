@@ -18,8 +18,13 @@ if (cmd === 'start') {
 
 } else if (cmd === '-h' || cmd === '--help') {
 
-  var options = require('../lib/options');
-  console.log(options.generateHelp());
+  var cp = require('child_process');
+  var path = require('path');
+
+  var prettierPath = path.resolve(__dirname, '../node_modules/.bin/prettier');
+  var prettierHelp = cp.execFileSync(prettierPath, ['--help']).toString();
+
+  console.log(prettierHelp.replace('prettier', 'prettier_d'));
 
 } else {
 
