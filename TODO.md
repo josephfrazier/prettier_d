@@ -1,7 +1,11 @@
 # TODO
 
 * Improve --help message
-  * Document limitations
+  * Document or fix limitations
+    * multiple files not supported
+    * --write not supported
+    * --list-different not supported
+    * --color not supported
   * Document extra options
     * --fallback
     * --json
