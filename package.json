@@ -29,6 +29,14 @@
     "test": "./test.sh",
     "prepublish": "npm test"
   },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "semi": false
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/josephfrazier/prettier_d.js.git"
@@ -40,6 +48,7 @@
     "json-stable-stringify": "^1.0.1",
     "minimist": "^1.2.0",
     "optionator": "^0.8.1",
+    "pkg-conf": "^2.0.0",
     "prettier": "https://github.com/prettier/prettier",
     "resolve": "^1.1.7",
     "supports-color": "^3.1.2",
