@@ -1,9 +1,5 @@
 # TODO
 
-* Improve --help message
-  * Document extra options
-    * --fallback
-    * --json
 * Support all prettier options
   * multiple files
     * exit code might be tricky for this one

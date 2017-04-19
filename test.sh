@@ -19,4 +19,6 @@ tmp=.write.test.js
 cp $file $tmp && $prettier --write $tmp && $prettier --list-different $tmp && rm $tmp
 
 $prettier --help | grep "Usage: prettier_d .opts. .filename.$" >/dev/null
+$prettier --help | grep -- "--fallback" >/dev/null
+$prettier --help | grep -- "--json" >/dev/null
 echo "$TOKEN $PWD $file $file" | nc localhost $PORT | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
