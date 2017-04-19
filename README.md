@@ -75,6 +75,30 @@ along with an access token in `~/.prettier_d`.
 
 See https://github.com/prettier/prettier#editor-integration
 
+### Real-time formatting in Vim
+
+If you use Vim, and you'd like `prettier_d` to format your code as you type, install [Neoformat] and add this to your `~/.vimrc`:
+
+```vim
+autocmd FileType javascript set formatprg=prettier_dnc\ --local-only\ --pkg-conf\ --fallback
+autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat
+
+" Use formatprg when available
+let g:neoformat_try_formatprg = 1
+" https://github.com/sbdchd/neoformat/issues/25
+let g:neoformat_only_msg_on_error = 1
+```
+
+If you're in a repository that has `prettier` in its `node_modules/`, this will format your code:
+
+* before each save
+* whenever text is changed in normal mode
+* whenever you leave insert mode
+
+The `prettier` configuration is read from `package.json` if available. Otherwise, the default prettier configuration is used. If you'd prefer a different configuration, replace `--pkg-conf` with your own options.
+
+[Neoformat]: https://github.com/sbdchd/neoformat
+
 ## Moar speed
 
 If you're really into performance and want the lowest possible latency, talk to
