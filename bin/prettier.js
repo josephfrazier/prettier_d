@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-'use strict';
+'use strict'
 
-require('./prettier_d');
+require('./prettier_d')

@@ -1,60 +1,54 @@
 #!/usr/bin/env node
-'use strict';
+'use strict'
 
 function start() {
-  require('../lib/launcher')();
+  require('../lib/launcher')()
 }
 
-var cmd = process.argv[2];
+var cmd = process.argv[2]
 if (cmd === 'start') {
-
-  start();
-
+  start()
 } else if (cmd === '-v' || cmd === '--version') {
-
-  console.log('v%s (prettier_d v%s)',
+  console.log(
+    'v%s (prettier_d v%s)',
     require('prettier/package.json').version,
-    require('../package.json').version);
-
+    require('../package.json').version
+  )
 } else if (cmd === '-h' || cmd === '--help') {
-
-  var options = require('../lib/options');
-  console.log(options.generateHelp());
-
+  var options = require('../lib/options')
+  console.log(options.generateHelp())
 } else {
-
-  var client = require('../lib/client');
+  var client = require('../lib/client')
   if (cmd === 'restart') {
-    client.stop(function () {
-      process.nextTick(start);
-    });
+    client.stop(function() {
+      process.nextTick(start)
+    })
   } else {
-    var commands = ['stop', 'status', 'restart'];
+    var commands = ['stop', 'status', 'restart']
     if (commands.indexOf(cmd) === -1) {
-      var useStdIn = (process.argv.indexOf('--stdin') > -1);
-      var args = process.argv.slice(2);
+      var useStdIn = process.argv.indexOf('--stdin') > -1
+      var args = process.argv.slice(2)
 
       if (!require('supports-color')) {
-        args.unshift('--no-color');
+        args.unshift('--no-color')
       }
 
       if (useStdIn) {
-        var text = '';
-        process.stdin.setEncoding('utf8');
+        var text = ''
+        process.stdin.setEncoding('utf8')
 
-        process.stdin.on('data', function (chunk) {
-          text += chunk;
-        });
+        process.stdin.on('data', function(chunk) {
+          text += chunk
+        })
 
-        process.stdin.on('end', function () {
-          client.lint(args, text);
-        });
+        process.stdin.on('end', function() {
+          client.lint(args, text)
+        })
       } else {
-        client.lint(args);
+        client.lint(args)
       }
     } else {
-      client[cmd](process.argv.slice(3));
+      client[cmd](process.argv.slice(3))
     }
   }
-
 }
