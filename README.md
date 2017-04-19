@@ -88,6 +88,8 @@ echo "$TOKEN $PWD file.js" | nc localhost $PORT
 
 # You can also pipe a stream in with `--stdin`:
 cat file.js | cat <(echo "$TOKEN $PWD --stdin") - | nc localhost $PORT
+# `prettier_dnc` is provided as a helper script for this usage:
+cat file.js | prettier_dnc
 ```
 
 This runs `prettier` even faster!

@@ -2,7 +2,10 @@
   "name": "prettier_d",
   "version": "5.3.0",
   "description": "Makes prettier the fastest formatter on the planet",
-  "bin": "bin/prettier_d.js",
+  "bin": {
+    "prettier_d": "bin/prettier_d.js",
+    "prettier_dnc": "bin/prettier_dnc.sh"
+  },
   "keywords": [
     "eslint_d",
     "prettier",
