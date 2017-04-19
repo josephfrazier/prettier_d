@@ -98,6 +98,12 @@ This runs `prettier` even faster!
 
 ## Limitations
 
+Multiple files are currently not supported. You can use e.g. `xargs` to work around this:
+
+```bash
+ls *.js | xargs -n1 prettier_d
+```
+
 A few `prettier` options are not currently supported:
 
 * `--color`

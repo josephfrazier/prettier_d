@@ -16,3 +16,6 @@ cat $prettier | cat <(echo "$TOKEN $PWD --stdin") - | nc localhost $PORT | md5su
 
 tmp=.write.test.js
 cp $prettier $tmp && $prettier --write $tmp && $prettier --list-different $tmp && rm $tmp
+
+$prettier --help | grep "Usage: prettier_d .opts. .filename.$" >/dev/null
+echo "$TOKEN $PWD $prettier $prettier" | nc localhost $PORT | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
