@@ -98,13 +98,8 @@ This runs `prettier` even faster!
 
 ## Limitations
 
-Multiple files are currently not supported. You can use e.g. `xargs` to work around this:
-
-```bash
-ls *.js | xargs -n1 prettier_d
-```
-
-The CLI output is not quite the same as `prettier`. Don't worry, the source code formatting still is!
+* Multiple files are currently not supported. You can use e.g. `xargs` to work around this: `ls *.js | xargs -n1 prettier_d` 
+* The CLI output is not quite the same as `prettier`. Don't worry, the source code formatting still is!
 
 ## License
 
