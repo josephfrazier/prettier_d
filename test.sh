@@ -34,6 +34,9 @@ $prettier --help | grep "Usage: prettier_d .opts. .filename.$" >/dev/null
 
 # Ensure --fallback is in the help message
 $prettier --help | grep -- "--fallback" >/dev/null
+# Ensure --fallback with invalid syntax prints the original input
+echo "a.1" | $prettier_dnc --fallback | grep '^a\.1$' >/dev/null
+echo "a.1" | $prettier_dnc --fallback | wc -c | grep ' 4$' >/dev/null
 
 # Ensure --json is in the help message
 $prettier --help | grep -- "--json" >/dev/null
