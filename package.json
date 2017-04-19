@@ -23,7 +23,8 @@
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "./test.sh"
+    "test": "./test.sh",
+    "prepublish": "npm test"
   },
   "repository": {
     "type": "git",
