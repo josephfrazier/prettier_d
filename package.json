@@ -21,7 +21,7 @@
   ],
   "homepage": "https://github.com/josephfrazier/prettier_d.js",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint bin lib",
     "pretest": "npm run lint",
     "test": "./test.sh",
     "prepublish": "npm test"
