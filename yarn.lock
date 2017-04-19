@@ -302,8 +302,8 @@ escope@^3.6.0:
     estraverse "^4.1.1"
 
 eslint-config-prettier@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-1.6.0.tgz#56e53a8eb461c06eced20cec40d765c185100fd5"
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-1.7.0.tgz#cda3ce22df1e852daa9370f1f3446e8b8a02ce44"
   dependencies:
     get-stdin "^5.0.1"
 
@@ -596,8 +596,8 @@ inquirer@^0.12.0:
     through "^2.3.6"
 
 interpret@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.0.2.tgz#f4f623f0bb7122f15f5717c8e254b8161b5c5b2d"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.0.3.tgz#cbc35c62eeee73f19ab7b10a801511401afc0f90"
 
 is-fullwidth-code-point@^1.0.0:
   version "1.0.0"
@@ -840,8 +840,8 @@ prelude-ls@~1.1.2:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
 
 "prettier@https://github.com/prettier/prettier":
-  version "1.1.0"
-  resolved "https://github.com/prettier/prettier#8d03423d17ffe4190a0b5207433e87e7a3d7b2d4"
+  version "1.2.2"
+  resolved "https://github.com/prettier/prettier#88e004184b67cc073d43b2b6a152b03240705f84"
   dependencies:
     ast-types "0.9.8"
     babel-code-frame "6.22.0"
