@@ -104,9 +104,7 @@ Multiple files are currently not supported. You can use e.g. `xargs` to work aro
 ls *.js | xargs -n1 prettier_d
 ```
 
-A few `prettier` options are not currently supported:
-
-* `--color`
+The CLI output is not quite the same as `prettier`. Don't worry, the source code formatting still is!
 
 ## License
 
