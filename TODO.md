@@ -5,5 +5,7 @@
     * --fallback
     * --json
 * Support all prettier options
+  * multiple files
+    * exit code might be tricky for this one
   * --color
 * Figure out how to use prettier's test cases?
