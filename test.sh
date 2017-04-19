@@ -40,6 +40,9 @@ echo "a.1" | $prettier_dnc --fallback | wc -c | grep ' 4$' >/dev/null
 
 # Ensure --json is in the help message
 $prettier --help | grep -- "--json" >/dev/null
+# Ensure --json formats JSON
+echo '{"key":"value"}' | md5sum | grep 707847a2b9a7eb329ff71b84be6085a2 >/dev/null
+echo '{"key":"value"}' | $prettier_dnc --json | md5sum | grep c482e72bc3892b16a4c5042a0188433a >/dev/null
 
 # Verify that multiple files are currently not supported
 echo "$TOKEN $PWD $file $file" | nc localhost $PORT | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
