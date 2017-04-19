@@ -13,3 +13,6 @@ md5sum $prettier | grep f75b2b44fd861a20b69f9a3e1960e419 >/dev/null
 echo "$TOKEN $PWD $prettier" | nc localhost $PORT | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
 cat $prettier | cat <(echo "$TOKEN $PWD --stdin") - | nc localhost $PORT | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
 ($prettier --list-different $prettier || true) | grep $prettier >/dev/null
+
+tmp=.write.test.js
+cp $prettier $tmp && $prettier --write $tmp && $prettier --list-different $tmp && rm $tmp

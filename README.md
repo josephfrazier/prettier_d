@@ -100,7 +100,6 @@ This runs `prettier` even faster!
 
 A few `prettier` options are not currently supported:
 
-* `--write`
 * `--color`
 
 ## License
