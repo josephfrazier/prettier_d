@@ -1,4 +1,4 @@
-autocmd FileType javascript set formatprg=../scripts/formatprg.sh
+autocmd FileType javascript set formatprg=../bin/prettier_dnc.sh\ --fallback\ --json\ --pkg-conf
 autocmd BufWritePre,TextChanged,InsertLeave */bin/*.js Neoformat
 autocmd BufWritePre,TextChanged,InsertLeave */lib/*.js Neoformat
 
