@@ -112,7 +112,7 @@ See https://github.com/prettier/prettier#editor-integration
 If you use Vim, and you'd like `prettier_d` to format your code as you type, install [Neoformat] and add this to your `~/.vimrc`:
 
 ```vim
-autocmd FileType javascript set formatprg=prettier_dnc\ --local-only\ --pkg-conf\ --fallback
+autocmd FileType javascript setlocal formatprg=prettier_dnc\ --local-only\ --pkg-conf\ --fallback
 autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat
 
 " Use formatprg when available
