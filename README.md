@@ -66,10 +66,42 @@ Available commands:
   The `prettier` engine will be created in the current directory. If the server
   is not yet running, it is started.
 
-Type `prettier_d --help` to see the supported `prettier` options.
-
 `prettier_d` will select a free port automatically and store the port number
 along with an access token in `~/.prettier_d`.
+
+Type `prettier_d --help` to see the supported `prettier` options.
+Here are the options supported by the bundled version of `prettier`:
+
+```
+Usage: prettier_d [opts] [filename]
+
+Available options:
+  --write                  Edit the file in-place. (Beware!)
+  --list-different or -l   Print filenames of files that are different from Prettier formatting.
+  --stdin                  Read input from stdin.
+  --print-width <int>      Specify the length of line that the printer will wrap on. Defaults to 80.
+  --tab-width <int>        Specify the number of spaces per indentation-level. Defaults to 2.
+  --use-tabs               Indent lines with tabs instead of spaces.
+  --no-semi                Do not print semicolons, except at the beginning of lines which may need them.
+  --single-quote           Use single quotes instead of double quotes.
+  --no-bracket-spacing     Do not print spaces between brackets.
+  --jsx-bracket-same-line  Put > on the last line instead of at a new line.
+  --trailing-comma <none|es5|all>
+                           Print trailing commas wherever possible. Defaults to none.
+  --parser <flow|babylon>  Specify which parse to use. Defaults to babylon.
+  --no-color               Do not colorize error messages.
+  --version or -v          Print Prettier version.
+
+
+Options specific to prettier_d:
+  --fallback               If formatting fails, print the original input. Defaults to false.
+  --json                   Try to parse input as JSON and format with json-stable-stringify and json-align. Defaults to false.
+  --local-only             Fail if prettier is not in ./node_modules. Defaults to false.
+                           If --json is specified, it will still be formatted.
+                           If --fallback is specified, the original input will be printed.
+  --pkg-conf               Read prettier configuration from nearest package.json to working directory.
+                           NOTE: CLI options pertaining to formatting will be ignored.
+```
 
 ## Editor integration
 
