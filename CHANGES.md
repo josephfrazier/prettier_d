@@ -184,7 +184,7 @@ Make `eslint_d` work out of the box in vim with the syntastic eslint checker.
 
 ## 2.0.0
 
-This realease support (almost) all `eslint` options. Check `eslint_d --help`.
+This release support (almost) all `eslint` options. Check `eslint_d --help`.
 
 Breaking that API already: The `lint` command was removed and in case you're
 not passing a control command like `start`, `stop`, `restart` or `status`, the
