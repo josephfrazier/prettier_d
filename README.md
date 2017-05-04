@@ -18,6 +18,8 @@ down. If you want to format from within your editor whenever you save a file,
 This will install the `prettier_d` command globally:
 
 ```bash
+yarn global add prettier_d
+# or
 npm install -g prettier_d
 ```
 
