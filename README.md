@@ -18,7 +18,7 @@ down. If you want to format from within your editor whenever you save a file,
 This will install the `prettier_d` command globally:
 
 ```bash
-$ npm install -g prettier_d
+npm install -g prettier_d
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ $ npm install -g prettier_d
 To start the server and format a file, just run:
 
 ```bash
-$ prettier_d file.js
+prettier_d file.js
 ```
 
 On the initial call, the `prettier_d` server is launched and then the given file
@@ -53,7 +53,7 @@ quite a bit of ram for cached instances. All memory can be freed up by running
 Control the server like this:
 
 ```bash
-$ prettier_d <command>
+prettier_d <command>
 ```
 
 Available commands:
