@@ -101,9 +101,45 @@ Options specific to prettier_d:
   --local-only             Fail if prettier is not in ./node_modules. Defaults to false.
                            If --json is specified, it will still be formatted.
                            If --fallback is specified, the original input will be printed.
-  --pkg-conf               Read prettier configuration from nearest package.json to working directory.
+  --pkg-conf               Read prettier configuration from nearest package.json/.prettierrc to working directory.
+                           If a .prettierrc file is found, it will override package.json.
                            NOTE: CLI options pertaining to formatting will be ignored.
 ```
+
+## Configuration file
+
+In the spirit of https://github.com/prettier/prettier/issues/918, the `--pkg-conf` option uses the `prettier` configuration read from the nearest `.prettierrc` or `package.json` file. If `.prettierrc` is present, it's expected to be JSON, for example:
+
+```json
+{
+  "printWidth": 80,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "semi": false
+}
+```
+
+If `package.json` is present, its `prettier` key is expected to have the same format as `.prettierrc` above. For example:
+
+```json
+{
+  "prettier": {
+    "useTabs": false,
+    "printWidth": 80,
+    "tabWidth": 2,
+    "singleQuote": false,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "parser": "babylon",
+    "semi": true
+  }
+}
+```
+
+Note that a `.prettierrc` file will override a `package.json` file. Also, these files are cached, so if you change them, you'll need to restart the server for the changes to apply: `prettier_d restart`
 
 ## Editor integration
 
@@ -129,7 +165,7 @@ If you're in a repository that has `prettier` in its `node_modules/`, this will 
 * whenever text is changed in normal mode
 * whenever you leave insert mode
 
-The `prettier` configuration is read from `package.json` if available. Otherwise, the default prettier configuration is used. If you'd prefer a different configuration, replace `--pkg-conf` with your own options.
+The `prettier` configuration is read from `.prettierrc` or `package.json` if available. Otherwise, the default prettier configuration is used. If you'd prefer a different configuration, replace `--pkg-conf` with your own options.
 
 [Neoformat]: https://github.com/sbdchd/neoformat
 
