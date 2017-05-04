@@ -10,8 +10,8 @@ Makes [prettier] the fastest formatter on the planet.
 Yes, it's actually super fast. But the node.js startup time and loading all the
 required modules slows down formatting times. `prettier_d` reduces this
 overhead by running a server in the background. It brings the formatting time
-down. If you want to format from within your editor whenever you save a file,
-`prettier_d` is for you.
+down from `0.25` seconds to `0.1` seconds on a `3265` byte file (down to `0.04` seconds using the `prettier_dnc` tool).
+If you want to format from within your editor whenever you save a file, `prettier_d` is for you.
 
 ## Install
 
