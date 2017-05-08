@@ -85,7 +85,7 @@ balanced-match@^0.4.1:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-0.4.2.tgz#cb3f3e3c732dc0f01ee70b403f302e61d7709838"
 
-brace-expansion@^1.0.0:
+brace-expansion@^1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.7.tgz#3effc3c50e000531fb720eaff80f0ae8ef23cf59"
   dependencies:
@@ -419,8 +419,8 @@ eslint@^3.19.0:
     user-home "^2.0.0"
 
 espree@^3.4.0:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/espree/-/espree-3.4.2.tgz#38dbdedbedc95b8961a1fbf04734a8f6a9c8c592"
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/espree/-/espree-3.4.3.tgz#2910b5ccd49ce893c2ffffaab4fd8b3a31b82374"
   dependencies:
     acorn "^5.0.1"
     acorn-jsx "^3.0.0"
@@ -665,21 +665,21 @@ isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
 
-jest-matcher-utils@^19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-19.0.0.tgz#5ecd9b63565d2b001f61fbf7ec4c7f537964564d"
+jest-matcher-utils@^20.0.0:
+  version "20.0.0"
+  resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-20.0.0.tgz#2c5d9dd11670c5418ffc78baecf9094db9e91e09"
   dependencies:
     chalk "^1.1.3"
-    pretty-format "^19.0.0"
+    pretty-format "^20.0.0"
 
-jest-validate@19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/jest-validate/-/jest-validate-19.0.0.tgz#8c6318a20ecfeaba0ba5378bfbb8277abded4173"
+jest-validate@20.0.0:
+  version "20.0.0"
+  resolved "https://registry.yarnpkg.com/jest-validate/-/jest-validate-20.0.0.tgz#c0832e8210190b6d5b39a46b8df536083131a7d7"
   dependencies:
-    chalk "^1.1.1"
-    jest-matcher-utils "^19.0.0"
-    leven "^2.0.0"
-    pretty-format "^19.0.0"
+    chalk "^1.1.3"
+    jest-matcher-utils "^20.0.0"
+    leven "^2.1.0"
+    pretty-format "^20.0.0"
 
 js-tokens@^3.0.0:
   version "3.0.1"
@@ -712,7 +712,7 @@ jsonpointer@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/jsonpointer/-/jsonpointer-4.0.1.tgz#4fd92cb34e0e9db3c89c8622ecf51f9b978c6cb9"
 
-leven@^2.0.0:
+leven@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-2.1.0.tgz#c2e7a9f772094dee9d34202ae8acce4687875580"
 
@@ -736,10 +736,10 @@ map-obj@^2.0.0:
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-2.0.0.tgz#a65cd29087a92598b8791257a523e021222ac1f9"
 
 minimatch@^3.0.2, minimatch@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.3.tgz#2a4e4090b96b2db06a9d7df01055a62a77c9b774"
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   dependencies:
-    brace-expansion "^1.0.0"
+    brace-expansion "^1.1.7"
 
 minimist@0.0.8:
   version "0.0.8"
@@ -858,7 +858,7 @@ prelude-ls@~1.1.2:
 
 "prettier@https://github.com/prettier/prettier":
   version "1.3.1"
-  resolved "https://github.com/prettier/prettier#1a1e6fc1dd1b2bf5ed3db6ba357a9f9306ef072b"
+  resolved "https://github.com/prettier/prettier#44934da349e71db8a8a177c37bc368390286802b"
   dependencies:
     ast-types "0.9.8"
     babel-code-frame "6.22.0"
@@ -868,12 +868,12 @@ prelude-ls@~1.1.2:
     flow-parser "0.45.0"
     get-stdin "5.0.1"
     glob "7.1.1"
-    jest-validate "19.0.0"
+    jest-validate "20.0.0"
     minimist "1.2.0"
 
-pretty-format@^19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-19.0.0.tgz#56530d32acb98a3fa4851c4e2b9d37b420684c84"
+pretty-format@^20.0.0:
+  version "20.0.0"
+  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-20.0.0.tgz#bd100f330e707e4f49fef3f234d6e915242a6e7e"
   dependencies:
     ansi-styles "^3.0.0"
 
