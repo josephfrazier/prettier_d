@@ -104,6 +104,8 @@ Options specific to prettier_d:
   --pkg-conf               Read prettier configuration from nearest package.json/.prettierrc to working directory.
                            If a .prettierrc file is found, it will override package.json.
                            NOTE: CLI options pertaining to formatting will be ignored.
+  --keep-indentation       Keep input indentation (read from first line).
+                           NOTE: This does not work with JSON.
 ```
 
 ## Configuration file

@@ -1,6 +1,6 @@
-autocmd FileType javascript setlocal formatprg=../bin/prettier_dnc.sh\ --fallback\ --pkg-conf
-autocmd BufWritePre,TextChanged,InsertLeave */bin/*.js Neoformat
-autocmd BufWritePre,TextChanged,InsertLeave */lib/*.js Neoformat
+autocmd FileType javascript setlocal formatprg=../bin/prettier_dnc.sh\ --fallback\ --pkg-conf\ --keep-indentation
+autocmd BufWritePre */bin/*.js Neoformat
+autocmd BufWritePre */lib/*.js Neoformat
 
 " Use formatprg when available
 let g:neoformat_try_formatprg = 1
