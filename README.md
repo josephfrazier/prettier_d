@@ -150,6 +150,8 @@ See https://github.com/prettier/prettier#editor-integration
 
 ### Real-time formatting in Vim
 
+[![asciicast](https://asciinema.org/a/bxk97niktazw18090o9thah06.png)](https://asciinema.org/a/bxk97niktazw18090o9thah06)
+
 If you use Vim, and you'd like `prettier_d` to format your code as you type, install [Neoformat] and add this to your `~/.vimrc`:
 
 ```vim
