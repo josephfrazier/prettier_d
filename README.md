@@ -180,6 +180,8 @@ let g:neoformat_try_formatprg = 1
 let g:neoformat_only_msg_on_error = 1
 ```
 
+Then, make sure you've started the server: `prettier_d start`.
+
 If you're in a repository that has `prettier` in its `node_modules/`, this will format your code:
 
 * before each save
