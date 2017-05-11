@@ -1,5 +1,7 @@
 # TODO
 
+* Add .editorconfig support
+  * See here for sample `editorconfig` API usage: https://github.com/josephfrazier/prettier-diff/blob/2cb938272b968869202f30d77e30dbf6d52ac8bf/bin/prettier-diff#L74-L81
 * Add test for --local-only option
   * Currently, you can test it like
   ```
