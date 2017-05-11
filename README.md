@@ -5,6 +5,22 @@
 
 Makes [prettier] the fastest formatter on the planet.
 
+Table of Contents
+=================
+
+* ["But prettier is pretty fast already, right?"](#but-prettier-is-pretty-fast-already-right)
+* [Install](#install)
+* [Usage](#usage)
+* [How does this work?](#how-does-this-work)
+* [Commands](#commands)
+* [Configuration file](#configuration-file)
+* [Editor integration](#editor-integration)
+   * [Real-time formatting in Vim](#real-time-formatting-in-vim)
+* [Moar speed](#moar-speed)
+* [Compatibility](#compatibility)
+* [Limitations](#limitations)
+* [License](#license)
+
 ## "But prettier is pretty fast already, right?"
 
 Yes, it's actually super fast. But the node.js startup time and loading all the
