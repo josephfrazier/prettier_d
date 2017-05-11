@@ -9,7 +9,6 @@ module.exports = {
     'prettier'
   ],
   rules: {
-    'standard/no-callback-literal': 0,
     'prettier/prettier': ['error', {
       printWidth: 80,
       tabWidth: 2,
