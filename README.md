@@ -117,8 +117,9 @@ Options specific to prettier_d:
   --local-only             Fail if prettier is not in ./node_modules. Defaults to false.
                            If --json is specified, it will still be formatted.
                            If --fallback is specified, the original input will be printed.
-  --pkg-conf               Read prettier configuration from nearest package.json/.prettierrc to working directory.
+  --pkg-conf               Read prettier configuration from nearest package.json/.prettierrc/.editorconfig to working directory.
                            If a .prettierrc file is found, it will override package.json.
+                           Both .prettierrc and package.json override .editorconfig.
                            NOTE: CLI options pertaining to formatting will be ignored.
   --keep-indentation       Keep input indentation (read from first line).
                            NOTE: This will mangle multiline literals (e.g. template strings).
@@ -127,7 +128,7 @@ Options specific to prettier_d:
 
 ## Configuration file
 
-In the spirit of https://github.com/prettier/prettier/issues/918, the `--pkg-conf` option uses the `prettier` configuration read from the nearest `.prettierrc` or `package.json` file. If `.prettierrc` is present, it's expected to be JSON, for example:
+In the spirit of https://github.com/prettier/prettier/issues/918, the `--pkg-conf` option uses the `prettier` configuration read from the nearest `.prettierrc`, `package.json`, or `.editorconfig` file. If `.prettierrc` is present, it's expected to be JSON, for example:
 
 ```json
 {
@@ -158,7 +159,13 @@ If `package.json` is present, its `prettier` key is expected to have the same fo
 }
 ```
 
-Note that a `.prettierrc` file will override a `package.json` file. Also, these files are cached, so if you change them, you'll need to restart the server for the changes to apply: `prettier_d restart`
+If `.editorconfig` is present, the following properties are parsed into `prettier` options:
+
+* `indent_style`
+* `tab_width`
+* `max_line_length`
+
+Note that a `.prettierrc` file will override a `package.json` file, and both will override `.editorconfig`. Also, these files are cached, so if you change them, you'll need to restart the server for the changes to apply: `prettier_d restart`
 
 ## Editor integration
 

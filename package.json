@@ -37,6 +37,7 @@
     "camelcase-keys": "^4.1.0",
     "chalk": "^1.1.1",
     "config-attendant": "^0.1.0",
+    "editorconfig": "^0.13.2",
     "json-align": "^0.1.0",
     "json-stable-stringify": "^1.0.1",
     "minimist": "^1.2.0",
