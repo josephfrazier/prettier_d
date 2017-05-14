@@ -22,7 +22,6 @@ Table of Contents
 * [Moar speed](#moar-speed)
 * [Compatibility](#compatibility)
 * [Limitations](#limitations)
-* [License](#license)
 
 ## "But prettier is pretty fast already, right?"
 
@@ -237,10 +236,6 @@ This runs `prettier` even faster!
 
 * Multiple files are currently not supported. You can use e.g. `xargs` to work around this: `ls *.js | xargs -n1 prettier_d` 
 * The CLI output is not quite the same as `prettier`. Don't worry, the source code formatting still is!
-
-## License
-
-MIT
 
 [SemVer]: http://img.shields.io/:semver-%E2%9C%93-brightgreen.svg
 [License]: http://img.shields.io/npm/l/prettier_d.svg
