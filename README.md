@@ -14,6 +14,9 @@ Table of Contents
 * [How does this work?](#how-does-this-work)
 * [Commands](#commands)
 * [Configuration file](#configuration-file)
+   * [`.prettierrc`](#prettierrc)
+   * [`package.json`](#packagejson)
+   * [`.editorconfig`](#editorconfig)
 * [Editor integration](#editor-integration)
    * [Real-time formatting in Vim](#real-time-formatting-in-vim)
 * [Moar speed](#moar-speed)
@@ -128,7 +131,11 @@ Options specific to prettier_d:
 
 ## Configuration file
 
-In the spirit of https://github.com/prettier/prettier/issues/918, the `--pkg-conf` option uses the `prettier` configuration read from the nearest `.prettierrc`, `package.json`, or `.editorconfig` file. If `.prettierrc` is present, it's expected to be JSON, for example:
+In the spirit of https://github.com/prettier/prettier/issues/918, the `--pkg-conf` option uses the `prettier` configuration read from the nearest `.prettierrc`, `package.json`, or `.editorconfig` file. 
+
+### `.prettierrc`
+
+If `.prettierrc` is present, it's expected to be JSON, for example:
 
 ```json
 {
@@ -140,6 +147,8 @@ In the spirit of https://github.com/prettier/prettier/issues/918, the `--pkg-con
   "semi": false
 }
 ```
+
+### `package.json`
 
 If `package.json` is present, its `prettier` key is expected to have the same format as `.prettierrc` above. For example:
 
@@ -158,6 +167,8 @@ If `package.json` is present, its `prettier` key is expected to have the same fo
   }
 }
 ```
+
+### `.editorconfig`
 
 If `.editorconfig` is present, the following properties are parsed into `prettier` options:
 
