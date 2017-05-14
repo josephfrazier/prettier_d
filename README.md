@@ -3,7 +3,16 @@
 [![SemVer]](http://semver.org)
 [![License]](https://github.com/josephfrazier/prettier\_d.js/blob/master/LICENSE)
 
-Makes [prettier] the fastest formatter on the planet.
+Makes [prettier] the fastest formatter on the planet. Additional options include:
+
+* `--pkg-conf`: Read prettier configuration from `.prettierrc`, `package.json`, or `.editorconfig`
+* `--json`: Format JSON with [json-stable-stringify] and [json-align]
+* `--keep-indentation`: Preserve the indentation of the first line
+* `--fallback`: Return original input if it cannot be parsed (useful for editor integrations)
+* `--local-only`: Force `./node_modules/prettier` to be used
+
+[json-stable-stringify]: https://www.npmjs.com/package/json-stable-stringify
+[json-align]: https://www.npmjs.com/package/json-align
 
 Table of Contents
 =================
