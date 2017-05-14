@@ -245,5 +245,5 @@ MIT
 [SemVer]: http://img.shields.io/:semver-%E2%9C%93-brightgreen.svg
 [License]: http://img.shields.io/npm/l/prettier_d.svg
 [prettier]: https://github.com/prettier/prettier
-[change220]: https://github.com/josephfrazier/prettier_d.js/blob/master/CHANGES.md#220
-[change401]: https://github.com/josephfrazier/prettier_d.js/blob/master/CHANGES.md#401
+[change220]: https://github.com/josephfrazier/prettier_d/blob/master/CHANGES.md#220
+[change401]: https://github.com/josephfrazier/prettier_d/blob/master/CHANGES.md#401
