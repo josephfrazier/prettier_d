@@ -69,7 +69,7 @@ token][change401] in `~/.prettier_d`. You can then run `prettier_d` commands the
 same way you would use `prettier` and it will delegate to the background server.
 It will load a [separate instance][change220] of prettier for each working
 directory to make sure settings are kept local. If prettier is found in the
-current working directories `node_modules` folder, then this version of prettier
+current working directory's `node_modules` folder, then this version of prettier
 is going to be used. Otherwise, the version of prettier that ships with
 `prettier_d` is used as a fallback.
 
