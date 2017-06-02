@@ -42,7 +42,7 @@
     "json-stable-stringify": "^1.0.1",
     "minimist": "^1.2.0",
     "optionator": "^0.8.1",
-    "prettier": "https://github.com/prettier/prettier",
+    "prettier": "^1.4.0",
     "resolve": "^1.1.7",
     "supports-color": "^3.1.2",
     "unquote": "^1.1.0"
