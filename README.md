@@ -214,7 +214,7 @@ If you're in a repository that has `prettier` in its `node_modules/`, this will 
 * whenever text is changed in normal mode
 * whenever you leave insert mode
 
-The `prettier` configuration is read from `.prettierrc` or `package.json` if available. Otherwise, the default prettier configuration is used. If you'd prefer a different configuration, replace `--pkg-conf` with your own options.
+The `prettier` configuration is read from `.prettierrc`, `package.json`, or `.editorconfig`, if available. Otherwise, the default prettier configuration is used. If you'd prefer a different configuration, replace `--pkg-conf` with your own options.
 
 [Neoformat]: https://github.com/sbdchd/neoformat
 
