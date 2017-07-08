@@ -1,3 +1,6 @@
+os:
+  - linux
+  - osx
 language: node_js
 node_js:
   - node
@@ -6,3 +9,6 @@ cache:
   yarn: true
   directories:
     - "node_modules"
+    - $HOME/Library/Caches/Homebrew # https://stackoverflow.com/questions/39930171/cache-brew-builds-with-travis-ci/41386136#41386136
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install md5sha1sum; fi
