@@ -19,7 +19,7 @@ TOKEN=`cat ~/.prettier_d | cut -d" " -f2`
 md5sum $file | grep f75b2b44fd861a20b69f9a3e1960e419 >/dev/null
 
 # Format it using netcat and make sure the output has been formatted
-echo "$TOKEN $PWD $file" | nc localhost $PORT | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
+echo "$TOKEN $PWD $file" | nc -q 0 localhost $PORT | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
 
 # Pipe it to netcat and get the same output
 cat $file | $prettier_dnc | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
@@ -48,6 +48,6 @@ echo '{"key":"value"}' | $prettier_dnc --json | md5sum | grep c482e72bc3892b16a4
 $prettier --json p.json | md5sum | grep faa3eb7c97ed871f63ec955b9498dee4 >/dev/null
 
 # Verify that multiple files are currently not supported
-echo "$TOKEN $PWD $file $file" | nc localhost $PORT | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
+echo "$TOKEN $PWD $file $file" | nc -q 0 localhost $PORT | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
 
 popd >/dev/null
