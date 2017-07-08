@@ -29,7 +29,7 @@ cat $file | $prettier_dnc | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev
 
 # Format the file, then make sure than --list-different doesn't fail
 tmp=.write.test.js
-cp $file $tmp && $prettier --write $tmp && $prettier --list-different $tmp | wc -c | grep ' 0$' >/dev/null && rm $tmp
+cp $file $tmp && $prettier --write $tmp && $prettier --list-different $tmp | wc -c | grep '\<0$' >/dev/null && rm $tmp
 
 # Ensure help message shows prettier_d and only one filename
 $prettier --help | grep "Usage: prettier_d .opts. .filename.$" >/dev/null
