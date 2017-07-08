@@ -1,5 +1,6 @@
 # prettier\_d
 
+[![Build Status](https://travis-ci.org/josephfrazier/prettier_d.svg?branch=master)](https://travis-ci.org/josephfrazier/prettier_d)
 [![SemVer]](http://semver.org)
 [![License]](https://github.com/josephfrazier/prettier\_d.js/blob/master/LICENSE)
 
