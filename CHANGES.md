@@ -2,6 +2,7 @@
 
 ## 6.0.0
 
+* Break compatibility with Prettier < 1.4.0
 * Remove `--keep-indentation` option.
   Prettier implemented range formatting in:
   * https://github.com/prettier/prettier/commit/569380155bb40243c1c8e7a3e21bd58cbad6df71

@@ -236,6 +236,7 @@ This runs `prettier` even faster!
 
 ## Compatibility
 
+- prettier_d `^6.0.0`: prettier `^1.4.0`
 - prettier_d `^5.0.0`: prettier `^1.0.0`
 
 ## Limitations
