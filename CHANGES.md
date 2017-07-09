@@ -1,5 +1,12 @@
 # Changes
 
+## 6.0.0
+
+* Remove `--keep-indentation` option.
+  Prettier implemented range formatting in:
+  * https://github.com/prettier/prettier/commit/569380155bb40243c1c8e7a3e21bd58cbad6df71
+  * https://github.com/prettier/prettier/commit/330601c77dc6d8db5bc5fce536dd79a813838ba9
+
 ## 5.6.0
 
 * Add .editorconfig support to --pkg-conf option
