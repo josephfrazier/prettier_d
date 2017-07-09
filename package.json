@@ -38,13 +38,13 @@
     "chalk": "^1.1.1",
     "config-attendant": "^0.1.1",
     "editorconfig": "^0.13.2",
-    "json-align": "^0.1.0",
-    "json-stable-stringify": "^1.0.1",
     "minimist": "^1.2.0",
     "optionator": "^0.8.1",
     "prettier": "https://github.com/josephfrazier/prettier#prettier_d",
     "resolve": "^1.1.7",
+    "string-to-stream": "^1.1.0",
     "supports-color": "^3.1.2",
+    "to-flags": "^0.2.0",
     "unquote": "^1.1.0"
   },
   "files": [
