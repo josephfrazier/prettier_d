@@ -35,16 +35,16 @@
   },
   "dependencies": {
     "camelcase-keys": "^4.1.0",
-    "chalk": "^1.1.1",
+    "chalk": "^2.1.0",
     "config-attendant": "^0.1.1",
-    "editorconfig": "^0.13.2",
+    "editorconfig": "^0.14.1",
     "json-align": "^0.1.0",
     "json-stable-stringify": "^1.0.1",
     "minimist": "^1.2.0",
     "optionator": "^0.8.1",
-    "prettier": "^1.4.0",
-    "resolve": "^1.1.7",
-    "supports-color": "^3.1.2",
+    "prettier": "^1.5.3",
+    "resolve": "^1.4.0",
+    "supports-color": "^4.2.1",
     "unquote": "^1.1.0"
   },
   "files": [
@@ -55,7 +55,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-plugin-prettier": "^2.0.1"
+    "eslint": "^4.5.0",
+    "eslint-plugin-prettier": "^2.2.0"
   }
 }
