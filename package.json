@@ -36,7 +36,6 @@
   "dependencies": {
     "camelcase-keys": "^4.1.0",
     "chalk": "^2.1.0",
-    "config-attendant": "^0.1.1",
     "editorconfig": "^0.14.1",
     "json-align": "^0.1.0",
     "json-stable-stringify": "^1.0.1",
