@@ -3,7 +3,9 @@
 IFS=' ' read PORT TOKEN < ~/.prettier_d
 
 if nc 2>&1 | grep -- -q >/dev/null; then
-  cat <(echo "$TOKEN $PWD --stdin $@") - | nc -q 0 localhost $PORT
+  NC_OPTIONS="-q 0"
 else
-  cat <(echo "$TOKEN $PWD --stdin $@") - | nc      localhost $PORT
+  NC_OPTIONS=""
 fi
+
+cat <(echo "$TOKEN $PWD --stdin $@") - | nc $NC_OPTIONS localhost $PORT
