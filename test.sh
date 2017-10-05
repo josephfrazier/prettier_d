@@ -29,7 +29,7 @@ tmp=.write.test.js
 cp $file $tmp && $prettier --write $tmp && $prettier --list-different $tmp | wc -c | grep '\<0$' >/dev/null && rm $tmp
 
 # Ensure help message shows prettier_d and only one filename
-$prettier --help | grep "Usage: prettier_d .opts. .filename.$" >/dev/null
+$prettier --help | grep "Usage: prettier_d .options. .filename.$" >/dev/null
 
 # Ensure --fallback is in the help message
 $prettier --help | grep -- "--fallback" >/dev/null
