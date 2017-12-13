@@ -42,7 +42,7 @@
     "json-stable-stringify": "^1.0.1",
     "minimist": "^1.2.0",
     "optionator": "^0.8.1",
-    "prettier": "^1.5.3",
+    "prettier": "^1.13.5",
     "resolve": "^1.4.0",
     "supports-color": "^4.2.1",
     "unquote": "^1.1.0"
