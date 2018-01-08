@@ -228,10 +228,10 @@ time.
 ```bash
 PORT=`cat ~/.prettier_d | cut -d" " -f1`
 TOKEN=`cat ~/.prettier_d | cut -d" " -f2`
-echo "$TOKEN $PWD file.js" | nc -q 0 localhost $PORT
+echo "$TOKEN $PWD file.js" | nc -q 0 127.0.0.1 $PORT
 
 # You can also pipe a stream in with `--stdin`:
-cat file.js | cat <(echo "$TOKEN $PWD --stdin") - | nc -q 0 localhost $PORT
+cat file.js | cat <(echo "$TOKEN $PWD --stdin") - | nc -q 0 127.0.0.1 $PORT
 # `prettier_dnc` is provided as a helper script for this usage:
 cat file.js | prettier_dnc
 ```

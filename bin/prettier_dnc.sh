@@ -8,4 +8,4 @@ else
   NC_OPTIONS=""
 fi
 
-cat <(echo "$TOKEN $PWD --stdin $@") - | nc $NC_OPTIONS localhost $PORT
+cat <(echo "$TOKEN $PWD --stdin $@") - | nc $NC_OPTIONS 127.0.0.1 $PORT
