@@ -16,14 +16,13 @@ Table of Contents
 * [Commands](#commands)
 * [Editor integration](#editor-integration)
    * [Real-time formatting in Vim](#real-time-formatting-in-vim)
-* [Moar speed](#moar-speed)
 
 ## "But prettier is pretty fast already, right?"
 
 Yes, it's actually super fast. But the node.js startup time and loading all the
 required modules slows down formatting times. `prettier_d` reduces this
 overhead by running a server in the background. It brings the formatting time
-down from `0.25` seconds to `0.1` seconds on a `3265` byte file (down to `0.04` seconds using the `prettier_dnc` tool).
+down from `0.25` seconds to `0.1` seconds on a `3265` byte file
 If you want to format from within your editor whenever you save a file, `prettier_d` is for you.
 
 ## Install
@@ -88,7 +87,7 @@ See https://github.com/prettier/prettier#editor-integration
 If you use Vim, and you'd like `prettier_d` to format your code as you type, install [Neoformat] and add this to your `~/.vimrc`:
 
 ```vim
-autocmd FileType javascript setlocal formatprg=prettier_dnc
+autocmd FileType javascript setlocal formatprg=prettier_d\ --stdin\ --parser=babylon
 autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat
 
 " Use formatprg when available
@@ -106,19 +105,6 @@ This will format your code:
 * whenever you leave insert mode
 
 [Neoformat]: https://github.com/sbdchd/neoformat
-
-## Moar speed
-
-If you're really into performance and want the lowest possible latency, talk to
-the `prettier_d` server with netcat. This will also eliminate the node.js startup
-time.
-
-```bash
-cat file.js | prettier_dnc
-```
-
-This runs `prettier` even faster!
-
 [SemVer]: http://img.shields.io/:semver-%E2%9C%93-brightgreen.svg
 [License]: http://img.shields.io/npm/l/prettier_d.svg
 [prettier]: https://github.com/prettier/prettier

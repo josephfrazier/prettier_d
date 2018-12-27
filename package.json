@@ -4,8 +4,7 @@
   "description": "Prettier is an opinionated code formatter",
   "bin": {
     "prettier": "./bin/prettier.js",
-    "prettier_d": "bin/prettier_d.js",
-    "prettier_dnc": "bin/prettier_dnc.sh"
+    "prettier_d": "bin/prettier_d.js"
   },
   "repository": "prettier/prettier",
   "homepage": "https://prettier.io",

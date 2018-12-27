@@ -4,7 +4,6 @@ set -euo pipefail # bash "strict mode"
 pushd test >/dev/null
 
 prettier=../bin/prettier_d.js
-prettier_dnc=../bin/prettier_dnc.sh
 file=./prettier.js
 
 # Restart the server to pick up any changes
@@ -18,8 +17,8 @@ TOKEN=`cat ~/.prettier_d | cut -d" " -f2`
 # Make sure the fixture hasn't changed
 md5sum $file | grep f75b2b44fd861a20b69f9a3e1960e419 >/dev/null
 
-# Format it using netcat and make sure the output has been formatted
-cat $file | $prettier_dnc --parser babylon | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
+# Format it using stdin and make sure the output has been formatted
+cat $file | $prettier --stdin --parser babylon | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
 
 # Ensure that --list-different prints the filename
 ($prettier --list-different $file || true) | grep $(basename $file) >/dev/null
