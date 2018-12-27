@@ -28,9 +28,6 @@ cat $file | $prettier_dnc --parser babylon | md5sum | grep 750573a1ced7ec47055a5
 tmp=.write.test.js
 cp $file $tmp && $prettier --write $tmp && $prettier --list-different $tmp | wc -c | grep '\<0$' >/dev/null && rm $tmp
 
-# Ensure help message shows prettier_d and only one filename
-$prettier --help | grep "Usage: prettier_d .options. .filename.$" >/dev/null
-
 # Ensure --fallback is in the help message
 $prettier --help | grep -- "--fallback" >/dev/null
 # Ensure --fallback with invalid syntax prints the original input
