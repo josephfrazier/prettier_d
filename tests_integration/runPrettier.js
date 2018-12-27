@@ -3,6 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const stripAnsi = require("strip-ansi");
+const sinon = require("sinon");
 
 const isProduction = process.env.NODE_ENV === "production";
 const prettierRootDir = isProduction ? process.env.PRETTIER_DIR : "../";
@@ -12,6 +13,20 @@ const prettierCli = path.join(prettierRootDir, prettierPkg.bin.prettier);
 const thirdParty = isProduction
   ? path.join(prettierRootDir, "./third-party")
   : path.join(prettierRootDir, "./src/common/third-party");
+
+if (!global.jest) {
+  global.jest = {
+    spyOn: (object, method) => {
+      return {
+        mockImplementation: mockImpl => {
+          sinon.replace(object, method, sinon.fake(mockImpl));
+        }
+      };
+    },
+    resetModules: () => {},
+    restoreAllMocks: () => sinon.restore()
+  };
+}
 
 function runPrettier(dir, args, options) {
   args = args || [];
