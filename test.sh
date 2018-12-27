@@ -28,7 +28,7 @@ cat $file | $prettier_dnc --parser babylon | md5sum | grep 750573a1ced7ec47055a5
 tmp=.write.test.js
 cp $file $tmp && $prettier --write $tmp && $prettier --list-different $tmp | wc -c | grep '\<0$' >/dev/null && rm $tmp
 
-# Verify that multiple files are currently not supported
-$prettier $file $file | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
+# Verify that multiple files are supported
+$prettier $file ./install-service-worker.js | md5sum | grep 3a35d94b8e9c752581de57aaecd86862 >/dev/null
 
 popd >/dev/null
