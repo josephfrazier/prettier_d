@@ -8,9 +8,6 @@ function start() {
 const cmd = process.argv[2];
 if (cmd === "start") {
   start();
-} else if (cmd === "-v" || cmd === "--version") {
-  // eslint-disable-next-line no-console
-  console.log("v%s", require("../package.json").version);
 } else {
   const client = require("../lib/client");
   if (cmd === "restart") {
