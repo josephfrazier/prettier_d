@@ -1,5 +1,12 @@
 # Changes
 
+## Post-5.6.0
+
+* Become a fork of Prettier instead using whatever Prettier is installed separately
+* Remove custom option parsing, defer to Prettier instead
+* Stop versioning (install from GitHub to use)
+* Remove `prettier_dnc` script (use `prettier_d` directly instead)
+
 ## 5.6.0
 
 * Add .editorconfig support to --pkg-conf option
