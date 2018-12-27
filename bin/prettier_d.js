@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 "use strict";
 
+const getStdin = require("get-stdin");
+
 function start() {
   require("../lib/launcher")();
 }
@@ -25,25 +27,12 @@ if (commands.indexOf(cmd) > -1) {
   return;
 }
 
-const useStdIn = process.argv.indexOf("--stdin") > -1;
 const args = process.argv.slice(2);
 
 if (!require("supports-color")) {
   args.unshift("--no-color");
 }
 
-if (!useStdIn) {
-  client.lint(args);
-  return;
-}
-
-let text = "";
-process.stdin.setEncoding("utf8");
-
-process.stdin.on("data", chunk => {
-  text += chunk;
-});
-
-process.stdin.on("end", () => {
+getStdin().then(text => {
   client.lint(args, text);
 });
