@@ -22,7 +22,7 @@ md5sum $file | grep f75b2b44fd861a20b69f9a3e1960e419 >/dev/null
 cat $file | $prettier_dnc | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
 
 # Ensure that --list-different prints the filename
-($prettier --list-different $file || true) | grep $file >/dev/null
+($prettier --list-different $file || true) | grep $(basename $file) >/dev/null
 
 # Format the file, then make sure than --list-different doesn't fail
 tmp=.write.test.js
