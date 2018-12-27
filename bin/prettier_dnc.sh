@@ -8,4 +8,4 @@ else
   NC_OPTIONS=""
 fi
 
-cat <(echo "$TOKEN $PWD --stdin $@") - | nc $NC_OPTIONS 127.0.0.1 $PORT
+cat <(echo "$TOKEN $PWD --stdin $@") - | nc $NC_OPTIONS 127.0.0.1 $PORT | jq --raw-output --join-output .stdout
