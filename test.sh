@@ -37,13 +37,6 @@ $prettier --help | grep -- "--fallback" >/dev/null
 echo "a.1" | $prettier_dnc --fallback | grep '^a\.1$' >/dev/null
 echo "a.1" | $prettier_dnc --fallback | wc -c | grep '\<4$' >/dev/null
 
-# Ensure --json is in the help message
-$prettier --help | grep -- "--json" >/dev/null
-# Ensure --json formats JSON
-echo '{"key":"value"}' | md5sum | grep 707847a2b9a7eb329ff71b84be6085a2 >/dev/null
-echo '{"key":"value"}' | $prettier_dnc --json | md5sum | grep c482e72bc3892b16a4c5042a0188433a >/dev/null
-$prettier --json p.json | md5sum | grep faa3eb7c97ed871f63ec955b9498dee4 >/dev/null
-
 # Verify that multiple files are currently not supported
 $prettier $file $file | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
 
