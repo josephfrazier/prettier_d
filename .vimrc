@@ -1,4 +1,4 @@
-autocmd FileType javascript setlocal formatprg=../bin/prettier_dnc.sh
+autocmd FileType javascript setlocal formatprg=../bin/prettier_dnc.sh\ --parser=babylon
 autocmd BufWritePre,TextChanged,InsertLeave */bin/*.js Neoformat
 autocmd BufWritePre,TextChanged,InsertLeave */lib/*.js Neoformat
 
