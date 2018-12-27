@@ -7,13 +7,9 @@
 Makes [prettier] the fastest formatter on the planet. Additional options include:
 
 * `--pkg-conf`: Read prettier configuration from `.prettierrc`, `package.json`, or `.editorconfig`
-* `--json`: Format JSON with [json-stable-stringify] and [json-align]
 * `--keep-indentation`: Preserve the indentation of the first line
 * `--fallback`: Return original input if it cannot be parsed (useful for editor integrations)
 * `--local-only`: Force `./node_modules/prettier` to be used
-
-[json-stable-stringify]: https://www.npmjs.com/package/json-stable-stringify
-[json-align]: https://www.npmjs.com/package/json-align
 
 Table of Contents
 =================
@@ -125,9 +121,7 @@ Available options:
 
 Options specific to prettier_d:
   --fallback               If formatting fails, print the original input. Defaults to false.
-  --json                   Try to parse input as JSON and format with json-stable-stringify and json-align. Defaults to false.
   --local-only             Fail if prettier is not in ./node_modules. Defaults to false.
-                           If --json is specified, it will still be formatted.
                            If --fallback is specified, the original input will be printed.
   --pkg-conf               Read prettier configuration from nearest package.json/.prettierrc/.editorconfig to working directory.
                            If a .prettierrc file is found, it will override package.json.
@@ -135,7 +129,6 @@ Options specific to prettier_d:
                            NOTE: CLI options pertaining to formatting will be ignored.
   --keep-indentation       Keep input indentation (read from first line).
                            NOTE: This will mangle multiline literals (e.g. template strings).
-                           NOTE: This does not work with JSON.
 ```
 
 ## Configuration file
