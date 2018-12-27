@@ -23,7 +23,7 @@ if (!global.jest) {
         }
       };
     },
-    resetModules: () => {},
+    resetModules: () => delete require.cache[require.resolve(prettierCli)],
     restoreAllMocks: () => sinon.restore()
   };
 }
