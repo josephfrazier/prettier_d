@@ -1,4 +1,5 @@
 #!/usr/bin/env node
-'use strict'
 
-require('./prettier_d')
+"use strict";
+
+require("../src/cli").run(process.argv.slice(2));

@@ -3,7 +3,7 @@ set -euo pipefail # bash "strict mode"
 
 pushd test >/dev/null
 
-prettier=../bin/prettier.js
+prettier=../bin/prettier_d.js
 prettier_dnc=../bin/prettier_dnc.sh
 file=./prettier.js
 

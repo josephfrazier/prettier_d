@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`callAndConstructSignatureLong.ts 1`] = `
+====================================options=====================================
+parsers: ["typescript"]
+printWidth: 80
+                                                                                | printWidth
+=====================================input======================================
+interface Interface {
+    <
+        Voila, 
+        InViewHumbleVaudevillianVeteran, 
+        CastVicariouslyAsBothVictimAndVillainByTheVicissitudesOfFate
+    >(): V;
+    new <
+        ThisVisage, 
+        NoMereVeneerOfVanity, 
+        IsAVestigeOfTheVoxPopuliNowVacant, 
+        Vanished
+    >(): V;
+}
+
+=====================================output=====================================
+interface Interface {
+  <
+    Voila,
+    InViewHumbleVaudevillianVeteran,
+    CastVicariouslyAsBothVictimAndVillainByTheVicissitudesOfFate
+  >(): V;
+  new <
+    ThisVisage,
+    NoMereVeneerOfVanity,
+    IsAVestigeOfTheVoxPopuliNowVacant,
+    Vanished
+  >(): V;
+}
+
+================================================================================
+`;
+
+exports[`functionTypeLong.ts 1`] = `
+====================================options=====================================
+parsers: ["typescript"]
+printWidth: 80
+                                                                                | printWidth
+=====================================input======================================
+type AwkwardlyLongFunctionTypeDefinition = <
+    GenericTypeNumberOne,
+    GenericTypeNumberTwo,
+    GenericTypeNumberThree
+>(
+    arg1: GenericTypeNumberOne,
+    arg2: GenericTypeNumberTwo,
+    arg3: GenericTypeNumberThree
+) => (GenericTypeNumberOne | GenericTypeNumberTwo | GenericTypeNumberThree);
+
+=====================================output=====================================
+type AwkwardlyLongFunctionTypeDefinition = <
+  GenericTypeNumberOne,
+  GenericTypeNumberTwo,
+  GenericTypeNumberThree
+>(
+  arg1: GenericTypeNumberOne,
+  arg2: GenericTypeNumberTwo,
+  arg3: GenericTypeNumberThree
+) => GenericTypeNumberOne | GenericTypeNumberTwo | GenericTypeNumberThree;
+
+================================================================================
+`;
+
+exports[`interfaceParamsLong.ts 1`] = `
+====================================options=====================================
+parsers: ["typescript"]
+printWidth: 80
+                                                                                | printWidth
+=====================================input======================================
+interface ReallyReallyLongName<
+    TypeArgumentNumberOne, 
+    TypeArgumentNumberTwo,
+    TypeArgumentNumberThree
+> {}
+
+=====================================output=====================================
+interface ReallyReallyLongName<
+  TypeArgumentNumberOne,
+  TypeArgumentNumberTwo,
+  TypeArgumentNumberThree
+> {}
+
+================================================================================
+`;
+
+exports[`typeParametersLong.ts 1`] = `
+====================================options=====================================
+parsers: ["typescript"]
+printWidth: 80
+                                                                                | printWidth
+=====================================input======================================
+type ReallyReallyReallyLongName<
+    ReallyReallyReallyLongName1, ReallyReallyReallyLongName2
+> = any;
+
+=====================================output=====================================
+type ReallyReallyReallyLongName<
+  ReallyReallyReallyLongName1,
+  ReallyReallyReallyLongName2
+> = any;
+
+================================================================================
+`;

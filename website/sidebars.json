@@ -1,0 +1,35 @@
+{
+  "docs": {
+    "About": [
+      "index",
+      "why-prettier",
+      "comparison",
+      "option-philosophy",
+      "rationale"
+    ],
+    "Usage": [
+      "install",
+      "cli",
+      "api",
+      "browser",
+      "plugins",
+      "precommit",
+      "watching-files",
+      "eslint",
+      "ignore"
+    ],
+    "Configuring Prettier": [
+      "options",
+      "configuration"
+    ],
+    "Editors": [
+      "editors",
+      "webstorm",
+      "vim"
+    ],
+    "Misc": [
+      "technical-details",
+      "related-projects"
+    ]
+  }
+}
