@@ -3,8 +3,10 @@
 
 const getStdin = require("get-stdin");
 
+const client = require("../lib/client");
+
 function start() {
-  require("../lib/launcher")();
+  client.launcher();
 }
 
 const cmd = process.argv[2];
@@ -12,8 +14,6 @@ if (cmd === "start") {
   start();
   return;
 }
-
-const client = require("../lib/client");
 if (cmd === "restart") {
   client.stop(() => {
     process.nextTick(start);
