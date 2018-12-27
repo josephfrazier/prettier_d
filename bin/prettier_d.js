@@ -11,10 +11,6 @@ if (cmd === "start") {
 } else if (cmd === "-v" || cmd === "--version") {
   // eslint-disable-next-line no-console
   console.log("v%s", require("../package.json").version);
-} else if (cmd === "-h" || cmd === "--help") {
-  const options = require("../lib/options");
-  // eslint-disable-next-line no-console
-  console.log(options.generateHelp());
 } else {
   const client = require("../lib/client");
   if (cmd === "restart") {
