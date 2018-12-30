@@ -1,6 +1,6 @@
 # Changes
 
-## Post-5.6.0
+## Post-5.7.4
 
 * Become a fork of Prettier instead using whatever Prettier is installed separately
 * Remove custom option parsing, defer to Prettier instead
