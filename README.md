@@ -30,9 +30,9 @@ If you want to format from within your editor whenever you save a file, `prettie
 This will install the `prettier_d` command globally:
 
 ```bash
-yarn global add https://github.com/josephfrazier/prettier_d#prettier-fork
+yarn global add https://github.com/josephfrazier/prettier_d
 # or
-npm install -g https://github.com/josephfrazier/prettier_d#prettier-fork
+npm install -g https://github.com/josephfrazier/prettier_d
 ```
 
 ## Usage
