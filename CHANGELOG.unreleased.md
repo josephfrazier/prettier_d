@@ -42,66 +42,148 @@ Examples:
 
 -->
 
-- CLI: Honor stdin-filepath when outputting error messages.
-
-- Markdown: Do not align table contents if it exceeds the print width and `--prose-wrap never` is set ([#5701] by [@chenshuai2144])
-
-  The aligned table is less readable than the compact one
-  if it's particularly long and the word wrapping is not enabled in the editor
-  so we now print them as compact tables in these situations.
-
-  <!-- prettier-ignore -->
-  ```md
-  <!-- Input -->
-  | Property | Description | Type | Default |
-  | -------- | ----------- | ---- | ------- |
-  | bordered | Toggles rendering of the border around the list | boolean | false |
-  | itemLayout | The layout of list, default is `horizontal`, If a vertical list is desired, set the itemLayout property to `vertical` | string | - |
-
-  <!-- Output (Prettier stable, --prose-wrap never) -->
-  | Property   | Description                                                                                                           | Type    | Default |
-  | ---------- | --------------------------------------------------------------------------------------------------------------------- | ------- | ------- |
-  | bordered   | Toggles rendering of the border around the list                                                                       | boolean | false   |
-  | itemLayout | The layout of list, default is `horizontal`, If a vertical list is desired, set the itemLayout property to `vertical` | string  | -       |
-
-  <!-- Output (Prettier master, --prose-wrap never) -->
-  | Property | Description | Type | Default |
-  | --- | --- | --- | --- |
-  | bordered | Toggles rendering of the border around the list | boolean | false |
-  | itemLayout | The layout of list, default is `horizontal`, If a vertical list is desired, set the itemLayout property to `vertical` | string | - |
-  ```
-
-- LWC: Add support for Lightning Web Components ([#5800] by [@ntotten])
-
-  Supports [Lightning Web Components (LWC)](https://developer.salesforce.com/docs/component-library/documentation/lwc) template format for HTML attributes by adding a new parser called `lwc`.
-
-  <!-- prettier-ignore -->
-  ```html
-  // Input
-  <my-element data-for={value}></my-element>
-
-  // Output (Prettier stable)
-  <my-element data-for="{value}"></my-element>
-
-  // Output (Prettier master)
-  <my-element data-for={value}></my-element>
-  ```
-
-- JavaScript: Fix parens logic for optional chaining expressions and closure type casts ([#5843] by [@yangsu])
-
-  Logic introduced in #4542 will print parens in the wrong places and produce invalid code for optional chaining expressions (with more than 2 nodes) or closure type casts that end in function calls.
+- Range: Fix ranged formatting not using the correct line width ([#6050] by [@mathieulj])
 
   <!-- prettier-ignore -->
   ```js
   // Input
-  (a?.b[c]).c();
-  let value = /** @type {string} */ (this.members[0]).functionCall();
+  function f() {
+    if (true) {
+      call("this line is 79 chars", "long", "it should", "stay as single line");
+    }
+  }
+
+  // Output (Prettier stable run with --range-start 30 --range-end 110)
+  function f() {
+    if (true) {
+      call(
+        "this line is 79 chars",
+        "long",
+        "it should",
+        "stay as single line"
+      );
+    }
+  }
+
+  // Output (Prettier stable run without range)
+  function f() {
+    if (true) {
+      call("this line is 79 chars", "long", "it should", "stay as single line");
+    }
+  }
+
+  // Output (Prettier master with and without range)
+  function f() {
+    if (true) {
+      call("this line is 79 chars", "long", "it should", "stay as single line");
+    }
+  }
+  ```
+
+- JavaScript: Fix closure compiler typecasts ([#5947] by [@jridgewell])
+
+  If a closing parenthesis follows after a typecast in an inner expression, the typecast would wrap everything to the that following parenthesis.
+
+  <!-- prettier-ignore -->
+  ```js
+  // Input
+  test(/** @type {!Array} */(arrOrString).length);
+  test(/** @type {!Array} */((arrOrString)).length + 1);
 
   // Output (Prettier stable)
-  a(?.b[c]).c();
-  let value = /** @type {string} */ this(.members[0]).functionCall();
+  test(/** @type {!Array} */ (arrOrString.length));
+  test(/** @type {!Array} */ (arrOrString.length + 1));
 
   // Output (Prettier master)
-  (a?.b[c]).c();
-  let value = /** @type {string} */ (this.members[0]).functionCall();
+  test(/** @type {!Array} */ (arrOrString).length);
+  test(/** @type {!Array} */ (arrOrString).length + 1);
+  ```
+
+- JavaScript: respect parenthesis around optional chaining before await ([#6087] by [@evilebottnawi])
+
+  <!-- prettier-ignore -->
+  ```js
+  // Input
+  async function myFunction() {
+    var x = (await foo.bar.blah)?.hi;
+  }
+
+  // Output (Prettier stable)
+  async function myFunction() {
+    var x = await foo.bar.blah?.hi;
+  }
+
+  // Output (Prettier master)
+  async function myFunction() {
+    var x = (await foo.bar.blah)?.hi;
+  }
+  ```
+
+- Handlebars: Fix {{else}}{{#if}} into {{else if}} merging ([#6080] by [@dcyriller])
+
+  <!-- prettier-ignore -->
+  ```
+  // Input
+  {{#if a}}
+    a
+  {{else}}
+    {{#if c}}
+      c
+    {{/if}}
+    e
+  {{/if}}
+
+  // Output (Prettier stable)
+  {{#if a}}
+    a
+  {{else if c}}
+    c
+  e
+  {{/if}}
+
+  // Output (Prettier master)
+  Code Sample
+  {{#if a}}
+    a
+  {{else}}
+    {{#if c}}
+      c
+    {{/if}}
+    e
+  {{/if}}
+
+* JavaScript: Improved multiline closure compiler typecast comment detection ([#6070] by [@yangsu])
+
+  Previously, multiline closure compiler typecast comments with lines that
+  start with \* weren't flagged correctly and the subsequent parenthesis were
+  stripped. Prettier master fixes this issue.
+
+  <!-- prettier-ignore --\>
+  ```js
+  // Input
+  const style =/**
+   * @type {{
+   *   width: number,
+   * }}
+  */({
+    width,
+  });
+  
+  // Output (Prettier stable)
+  const style =/**
+   * @type {{
+   *   width: number,
+   * }}
+  */ {
+    width,
+  };
+  
+  // Output (Prettier master)
+  const style =/**
+   * @type {{
+   *   width: number,
+   * }}
+  */({
+    width,
+  });
   ```
