@@ -69,6 +69,20 @@ See the [strings rationale](rationale.md#strings) for more information.
 | ------- | ---------------- | --------------------- |
 | `false` | `--single-quote` | `singleQuote: <bool>` |
 
+## Quote Props
+
+Change when properties in objects are quoted.
+
+Valid options:
+
+- `"as-needed"` - Only add quotes around object properties where required.
+- `"consistent"` - If at least one property in an object requires quotes, quote all properties.
+- `"preserve"` - Respect the input use of quotes in object properties.
+
+| Default       | CLI Override                                                         | API Override                                                         |
+| ------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `"as-needed"` | <code>--quote-props <as-needed&#124;consistent&#124;preserve></code> | <code>quoteProps: "<as-needed&#124;consistent&#124;preserve>"</code> |
+
 ## JSX Quotes
 
 Use single quotes instead of double quotes in JSX.
@@ -292,6 +306,21 @@ Valid options:
 | Default | CLI Override                                                             | API Override                                                            |
 | ------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
 | `"css"` | <code>--html-whitespace-sensitivity <css&#124;strict&#124;ignore></code> | <code>htmlWhitespaceSensitivity: "<css&#124;strict&#124;ignore>"</code> |
+
+## Vue files script and style tags indentation
+
+_First available in v1.19.0_
+
+Whether or not to indent the code inside `<script>` and `<style>` tags in Vue files. Some people (like [the creator of Vue](https://github.com/prettier/prettier/issues/3888#issuecomment-459521863)) don’t indent to save an indentation level, but this might break code folding in your editor.
+
+Valid options:
+
+- `"false"` - Do not indent script and style tags in Vue files.
+- `"true"` - Indent script and style tags in Vue files.
+
+| Default | CLI Override                    | API Override                      |
+| ------- | ------------------------------- | --------------------------------- |
+| `false` | `--vue-indent-script-and-style` | `vueIndentScriptAndStyle: <bool>` |
 
 ## End of Line
 

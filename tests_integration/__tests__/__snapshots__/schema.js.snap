@@ -279,6 +279,30 @@ Multiple values are accepted.",
             },
           ],
         },
+        "quoteProps": Object {
+          "default": "as-needed",
+          "description": "Change when properties in objects are quoted.",
+          "oneOf": Array [
+            Object {
+              "description": "Only add quotes around object properties where required.",
+              "enum": Array [
+                "as-needed",
+              ],
+            },
+            Object {
+              "description": "If at least one property in an object requires quotes, quote all properties.",
+              "enum": Array [
+                "consistent",
+              ],
+            },
+            Object {
+              "description": "Respect the input use of quotes in object properties.",
+              "enum": Array [
+                "preserve",
+              ],
+            },
+          ],
+        },
         "rangeEnd": Object {
           "default": Infinity,
           "description": "Format code ending at a given character offset (exclusive).
@@ -341,6 +365,11 @@ in order for it to be formatted.",
         "useTabs": Object {
           "default": false,
           "description": "Indent with tabs instead of spaces.",
+          "type": "boolean",
+        },
+        "vueIndentScriptAndStyle": Object {
+          "default": false,
+          "description": "Indent script and style tags in Vue files.",
           "type": "boolean",
         },
       },

@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`arrow.js 1`] = `
+====================================options=====================================
+parsers: ["flow", "babel"]
+printWidth: 80
+                                                                                | printWidth
+=====================================input======================================
+const fn = (/*event, data*/) => doSomething();
+
+const fn2 = (/*event, data*/) => doSomething(anything);
+
+=====================================output=====================================
+const fn = (/*event, data*/) => doSomething();
+
+const fn2 = (/*event, data*/) => doSomething(anything);
+
+================================================================================
+`;
+
 exports[`assignment-pattern.js 1`] = `
 ====================================options=====================================
 parsers: ["flow", "babel"]
@@ -10,7 +28,7 @@ const { a /* comment */ = 1 } = b;
 
 const { c = 1 /* comment */ } = d;
 
-let {a //comment
+let {d //comment
 = b} = c
 
 =====================================output=====================================
@@ -19,7 +37,7 @@ const { a /* comment */ = 1 } = b;
 const { c = 1 /* comment */ } = d;
 
 let {
-  a = b //comment
+  d = b //comment
 } = c;
 
 ================================================================================
@@ -307,6 +325,11 @@ React.render( // Warm any cache
   container
 );
 
+render?.( // Warm any cache
+  <ChildUpdates renderAnchor={true} anchorClassOn={true} />,
+  container
+);
+
 =====================================output=====================================
 render(
   // Warm any cache
@@ -320,113 +343,11 @@ React.render(
   container
 );
 
-================================================================================
-`;
-
-exports[`closure-compiler-type-cast.js 1`] = `
-====================================options=====================================
-parsers: ["flow", "babel"]
-printWidth: 80
-                                                                                | printWidth
-=====================================input======================================
-// test to make sure comments are attached correctly
-let inlineComment = /* some comment */ (
-  someReallyLongFunctionCall(withLots, ofArguments));
-
-let object = {
-  key: /* some comment */ (someReallyLongFunctionCall(withLots, ofArguments))
-};
-
-// preserve parens only for type casts
-let assignment = /** @type {string} */ (getValue());
-let value = /** @type {string} */ (this.members[0]).functionCall();
-
-functionCall(1 + /** @type {string} */ (value), /** @type {!Foo} */ ({}));
-
-function returnValue() {
-  return /** @type {!Array.<string>} */ (['hello', 'you']);
-}
-
-var newArray = /** @type {array} */ (numberOrString).map(x => x);
-var newArray = /** @type {array} */ ((numberOrString)).map(x => x);
-var newArray = /** @type {array} */ ((numberOrString).map(x => x));
-
-
-const data = functionCall(
-  arg1,
-  arg2,
-  /** @type {{height: number, width: number}} */ (arg3));
-
-// Invalid type casts
-const v = /** @type {} */ (value);
-const v = /** @type {}} */ (value);
-const v = /** @type } */ (value);
-const v = /** @type { */ (value);
-const v = /** @type {{} */ (value);
-
-const style = /** @type {{
-  width: number,
-  height: number,
-  marginTop: number,
-  marginLeft: number,
-  marginRight: number,
-  marginBottom: number,
-}} */ ({
-  width,
-  height,
-  ...margins,
-});
-
-=====================================output=====================================
-// test to make sure comments are attached correctly
-let inlineComment = /* some comment */ someReallyLongFunctionCall(
-  withLots,
-  ofArguments
+render?.(
+  // Warm any cache
+  <ChildUpdates renderAnchor={true} anchorClassOn={true} />,
+  container
 );
-
-let object = {
-  key: /* some comment */ someReallyLongFunctionCall(withLots, ofArguments)
-};
-
-// preserve parens only for type casts
-let assignment = /** @type {string} */ (getValue());
-let value = /** @type {string} */ (this.members[0]).functionCall();
-
-functionCall(1 + /** @type {string} */ (value), /** @type {!Foo} */ ({}));
-
-function returnValue() {
-  return /** @type {!Array.<string>} */ (["hello", "you"]);
-}
-
-var newArray = /** @type {array} */ (numberOrString).map(x => x);
-var newArray = /** @type {array} */ (numberOrString).map(x => x);
-var newArray = /** @type {array} */ (numberOrString.map(x => x));
-
-const data = functionCall(
-  arg1,
-  arg2,
-  /** @type {{height: number, width: number}} */ (arg3)
-);
-
-// Invalid type casts
-const v = /** @type {} */ value;
-const v = /** @type {}} */ value;
-const v = /** @type } */ value;
-const v = /** @type { */ value;
-const v = /** @type {{} */ value;
-
-const style = /** @type {{
-  width: number,
-  height: number,
-  marginTop: number,
-  marginLeft: number,
-  marginRight: number,
-  marginBottom: number,
-}} */ ({
-  width,
-  height,
-  ...margins
-});
 
 ================================================================================
 `;
@@ -437,34 +358,36 @@ parsers: ["flow", "babel"]
 printWidth: 80
                                                                                 | printWidth
 =====================================input======================================
-var x = {/* dangling */};
-var x = {
+var a = {/* dangling */};
+var b = {
   // dangling
 };
-var x = [/* dangling */];
-function x() {
+var b = [/* dangling */];
+function d() {
   /* dangling */
 }
 new Thing(/* dangling */);
 Thing(/* dangling */);
+Thing?.(/* dangling */);
 declare class Foo extends Qux<string> {/* dangling */}
 export /* dangling */{};
 
 =====================================output=====================================
-var x = {
+var a = {
   /* dangling */
 };
-var x = {
+var b = {
   // dangling
 };
-var x = [
+var b = [
   /* dangling */
 ];
-function x() {
+function d() {
   /* dangling */
 }
 new Thing(/* dangling */);
 Thing(/* dangling */);
+Thing?.(/* dangling */);
 declare class Foo extends Qux<string> {
   /* dangling */
 }
@@ -530,6 +453,18 @@ import(/* Hello */ 'something' /* Hello */)
 
 import('something' /* Hello */ + 'else')
 
+import(
+  /* Hello */
+  'something'
+  /* Hello */
+)
+
+wrap(
+  import(/* Hello */
+    'something'
+  )
+)
+
 =====================================output=====================================
 import(/* Hello */ "something");
 
@@ -538,6 +473,19 @@ import("something" /* Hello */);
 import(/* Hello */ "something" /* Hello */);
 
 import("something" /* Hello */ + "else");
+
+import(
+  /* Hello */
+  "something"
+  /* Hello */
+);
+
+wrap(
+  import(
+    /* Hello */
+    "something"
+  )
+);
 
 ================================================================================
 `;
@@ -553,15 +501,19 @@ export //comment
 
 export /* comment */ {};
 
+const foo = ''
 export {
   foo // comment
 }
 
+const bar = ''
 export {
   // comment
   bar
 }
 
+const fooo = ''
+const barr = ''
 export {
   fooo, // comment
   barr, // comment
@@ -573,15 +525,19 @@ export //comment
 
 export /* comment */{};
 
+const foo = "";
 export {
   foo // comment
 };
 
+const bar = "";
 export {
   // comment
   bar
 };
 
+const fooo = "";
+const barr = "";
 export {
   fooo, // comment
   barr // comment
@@ -622,7 +578,7 @@ type UploadState<E, EM, D>
   // Uploading to aws3 and CreatePostMutation succeeded
   | {type: "Success", data: D};
 
-type UploadState<E, EM, D>
+type UploadState2<E, EM, D>
   // The upload hasnt begun yet
   = A
   // The upload timed out
@@ -643,7 +599,7 @@ type UploadState<E, EM, D> =
   // Uploading to aws3 and CreatePostMutation succeeded
   | { type: "Success", data: D };
 
-type UploadState<E, EM, D> =
+type UploadState2<E, EM, D> =
   // The upload hasnt begun yet
   | A
   // The upload timed out
@@ -670,14 +626,14 @@ KEYPAD_NUMBERS.map(num => ( // Buttons 0-9
   <div />
 ));
 
-function f /* f */() {}
-function f (/* args */) {}
-function f () /* returns */ {}
-function f /* f */(/* args */) /* returns */ {}
+function f1 /* f */() {}
+function f2 (/* args */) {}
+function f3 () /* returns */ {}
+function f4 /* f */(/* args */) /* returns */ {}
 
-function f /* f */(/* a */ a) {}
-function f /* f */(a /* a */) {}
-function f /* f */(/* a */ a) /* returns */ {}
+function f5 /* f */(/* a */ a) {}
+function f6 /* f */(a /* a */) {}
+function f7 /* f */(/* a */ a) /* returns */ {}
 
 const obj = {
   f1 /* f */() {},
@@ -691,35 +647,35 @@ const obj = {
 (function f () /* returns */ {})();
 (function f /* f */(/* args */) /* returns */ {})();
 
-class C {
+class C1 {
   f/* f */() {}
 }
-class C {
+class C2 {
   f(/* args */) {}
 }
-class C {
+class C3 {
   f() /* returns */ {}
 }
-class C {
+class C4 {
   f/* f */(/* args */) /* returns */ {}
 }
 
-function foo() 
+function foo1() 
 // this is a function
 {
   return 42
 }
 
-function foo() // this is a function
+function foo2() // this is a function
 {
   return 42
 }
 
-function foo() { // this is a function
+function foo3() { // this is a function
   return 42
 }
 
-function foo() {
+function foo4() {
   // this is a function
   return 42;
 }
@@ -733,14 +689,14 @@ KEYPAD_NUMBERS.map((
   num // Buttons 0-9
 ) => <div />);
 
-function f /* f */() {}
-function f(/* args */) {}
-function f() /* returns */ {}
-function f /* f */(/* args */) /* returns */ {}
+function f1 /* f */() {}
+function f2(/* args */) {}
+function f3() /* returns */ {}
+function f4 /* f */(/* args */) /* returns */ {}
 
-function f /* f */(/* a */ a) {}
-function f /* f */(a /* a */) {}
-function f /* f */(/* a */ a) /* returns */ {}
+function f5 /* f */(/* a */ a) {}
+function f6 /* f */(a /* a */) {}
+function f7 /* f */(/* a */ a) /* returns */ {}
 
 const obj = {
   f1 /* f */() {},
@@ -754,35 +710,35 @@ const obj = {
 (function f() /* returns */ {})();
 (function f /* f */(/* args */) /* returns */ {})();
 
-class C {
+class C1 {
   f /* f */() {}
 }
-class C {
+class C2 {
   f(/* args */) {}
 }
-class C {
+class C3 {
   f() /* returns */ {}
 }
-class C {
+class C4 {
   f /* f */(/* args */) /* returns */ {}
 }
 
-function foo() {
+function foo1() {
   // this is a function
   return 42;
 }
 
-function foo() {
+function foo2() {
   // this is a function
   return 42;
 }
 
-function foo() {
+function foo3() {
   // this is a function
   return 42;
 }
 
-function foo() {
+function foo4() {
   // this is a function
   return 42;
 }
@@ -1169,6 +1125,69 @@ foo(
 ================================================================================
 `;
 
+exports[`jsdoc.js 1`] = `
+====================================options=====================================
+parsers: ["flow", "babel"]
+printWidth: 80
+                                                                                | printWidth
+=====================================input======================================
+/** @type {any} */
+const x = (
+    <div>
+        <div />
+    </div>
+);
+
+/**
+ * @type {object}
+ */
+() => (
+    <div>
+        sajdfpoiasdjfpoiasdjfpoiasdjfpoiadsjfpaoisdjfapsdiofjapioisadfaskfaspiofjp
+    </div>
+);
+
+/**
+ * @type {object}
+ */
+function HelloWorld() {
+    return (
+        <div>
+           <span>Test</span>
+        </div>
+    );
+}
+=====================================output=====================================
+/** @type {any} */
+const x = (
+  <div>
+    <div />
+  </div>
+);
+
+/**
+ * @type {object}
+ */
+() => (
+  <div>
+    sajdfpoiasdjfpoiasdjfpoiasdjfpoiadsjfpaoisdjfapsdiofjapioisadfaskfaspiofjp
+  </div>
+);
+
+/**
+ * @type {object}
+ */
+function HelloWorld() {
+  return (
+    <div>
+      <span>Test</span>
+    </div>
+  );
+}
+
+================================================================================
+`;
+
 exports[`jsx.js 1`] = `
 ====================================options=====================================
 parsers: ["flow", "babel"]
@@ -1375,7 +1394,7 @@ onClick={() => {}}>
    * Handles clicks.
    */
   onClick={() => {}}
-/>;
+></div>;
 
 <div
 // comment
@@ -1416,22 +1435,22 @@ parsers: ["flow", "babel"]
 printWidth: 80
                                                                                 | printWidth
 =====================================input======================================
-type f = (
+type f1 = (
   currentRequest: {a: number},
   // TODO this is a very very very very long comment that makes it go > 80 columns
 ) => number;
 
-f = (
+f2 = (
   currentRequest: {a: number},
   // TODO this is a very very very very long comment that makes it go > 80 columns
 ): number => {};
 
-f = (
+f3 = (
   currentRequest: {a: number},
   // TODO this is a very very very very long comment that makes it go > 80 columns
 ) => {};
 
-f = function(
+f4 = function(
   currentRequest: {a: number},
   // TODO this is a very very very very long comment that makes it go > 80 columns
 ) {};
@@ -1443,7 +1462,7 @@ class X {
   ) {}
 }
 
-function f(
+function f5(
   a: number
 // some comment here
 ): number {
@@ -1460,7 +1479,7 @@ var x = {
   }
 }
 
-class X {
+class X2 {
   getSectionMode(
     pageMetaData: PageMetaData,
     sectionMetaData: SectionMetaData = ['unknown']
@@ -1512,22 +1531,22 @@ class Foo {
 }
 
 =====================================output=====================================
-type f = (
+type f1 = (
   currentRequest: { a: number }
   // TODO this is a very very very very long comment that makes it go > 80 columns
 ) => number;
 
-f = (
+f2 = (
   currentRequest: { a: number }
   // TODO this is a very very very very long comment that makes it go > 80 columns
 ): number => {};
 
-f = (
+f3 = (
   currentRequest: { a: number }
   // TODO this is a very very very very long comment that makes it go > 80 columns
 ) => {};
 
-f = function(
+f4 = function(
   currentRequest: { a: number }
   // TODO this is a very very very very long comment that makes it go > 80 columns
 ) {};
@@ -1539,7 +1558,7 @@ class X {
   ) {}
 }
 
-function f(
+function f5(
   a: number
   // some comment here
 ): number {
@@ -1555,7 +1574,7 @@ var x = {
   ): $Enum<SectionMode> {}
 };
 
-class X {
+class X2 {
   getSectionMode(
     pageMetaData: PageMetaData,
     sectionMetaData: SectionMetaData = ["unknown"]
@@ -2077,6 +2096,47 @@ switch (foo) {
 ================================================================================
 `;
 
+exports[`tagged-template-literal.js 1`] = `
+====================================options=====================================
+parsers: ["flow", "babel"]
+printWidth: 80
+                                                                                | printWidth
+=====================================input======================================
+foo\`\`; // comment
+
+foo // comment
+\`\`;
+
+foo // comment
+\`
+\`;
+
+foo /* comment */\`
+\`;
+
+foo /* comment */
+\`
+\`;
+
+=====================================output=====================================
+foo\`\`; // comment
+
+foo // comment
+\`\`;
+
+foo // comment
+\`
+\`;
+
+foo/* comment */ \`
+\`;
+
+foo /* comment */\`
+\`;
+
+================================================================================
+`;
+
 exports[`template-literal.js 1`] = `
 ====================================options=====================================
 parsers: ["flow", "babel"]
@@ -2243,130 +2303,130 @@ parsers: ["flow", "babel"]
 printWidth: 80
                                                                                 | printWidth
 =====================================input======================================
-let obj = // Comment
+let obj1 = // Comment
 {
   key: 'val'
 }
 
-let obj // Comment
+let obj2 // Comment
 = {
   key: 'val'
 }
 
-let obj = { // Comment
+let obj3 = { // Comment
   key: 'val'
 }
 
-let obj = {
+let obj4 = {
   // Comment
   key: 'val'
 }
 
-let obj = // Comment
+let obj5 = // Comment
 [
   'val'
 ]
 
-let obj // Comment
+let obj6 // Comment
 = [
   'val'
 ]
 
-let obj = [ // Comment
+let obj7 = [ // Comment
   'val'
 ]
 
-let obj = [
+let obj8 = [
   // Comment
   'val'
 ]
 
-let obj = // Comment
+let obj9 = // Comment
 \`val\`;
 
-let obj = // Comment
+let obj10 = // Comment
 \`
 val
 val
 \`;
 
-let obj = // Comment
+let obj11 = // Comment
 tag\`val\`;
 
-let obj = // Comment
+let obj12 = // Comment
 tag\`
 val
 val
 \`;
 
 let // Comment
-  foo = 'val';
+  foo1 = 'val';
 
 let // Comment
-  foo = 'val',
+  foo2 = 'val',
   bar = 'val';
 
-const foo = 123
+const foo3 = 123
 // Nothing to see here.
 ;["2", "3"].forEach(x => console.log(x))
 
 =====================================output=====================================
-let obj =
+let obj1 =
   // Comment
   {
     key: "val"
   };
 
-let obj =
+let obj2 =
   // Comment
   {
     key: "val"
   };
 
-let obj = {
+let obj3 = {
   // Comment
   key: "val"
 };
 
-let obj = {
+let obj4 = {
   // Comment
   key: "val"
 };
 
-let obj =
+let obj5 =
   // Comment
   ["val"];
 
-let obj =
+let obj6 =
   // Comment
   ["val"];
 
-let obj = [
+let obj7 = [
   // Comment
   "val"
 ];
 
-let obj = [
+let obj8 = [
   // Comment
   "val"
 ];
 
-let obj =
+let obj9 =
   // Comment
   \`val\`;
 
-let obj =
+let obj10 =
   // Comment
   \`
 val
 val
 \`;
 
-let obj =
+let obj11 =
   // Comment
   tag\`val\`;
 
-let obj =
+let obj12 =
   // Comment
   tag\`
 val
@@ -2374,13 +2434,13 @@ val
 \`;
 
 let // Comment
-  foo = "val";
+  foo1 = "val";
 
 let // Comment
-  foo = "val",
+  foo2 = "val",
   bar = "val";
 
-const foo = 123;
+const foo3 = 123;
 // Nothing to see here.
 ["2", "3"].forEach(x => console.log(x));
 

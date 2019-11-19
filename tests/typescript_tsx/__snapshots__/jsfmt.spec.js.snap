@@ -38,6 +38,66 @@ printWidth: 80
 ================================================================================
 `;
 
+exports[`member-expression.tsx 1`] = `
+====================================options=====================================
+parsers: ["typescript"]
+printWidth: 80
+                                                                                | printWidth
+=====================================input======================================
+(<a />).method();
+(<a />).property;
+(<a />)["computed"];
+(<a />)["computed"]();
+(
+  <div>
+    <a>foo</a>
+  </div>
+).method();
+(
+  <div>
+    <a>foo</a>
+  </div>
+).property;
+(
+  <div>
+    <a>foo</a>
+  </div>
+)["computed"];
+(
+  <div>
+    <a>foo</a>
+  </div>
+)["computed"]();
+
+=====================================output=====================================
+(<a />).method();
+(<a />).property;
+(<a />)["computed"];
+(<a />)["computed"]();
+(
+  <div>
+    <a>foo</a>
+  </div>
+).method();
+(
+  <div>
+    <a>foo</a>
+  </div>
+).property;
+(
+  <div>
+    <a>foo</a>
+  </div>
+)["computed"];
+(
+  <div>
+    <a>foo</a>
+  </div>
+)["computed"]();
+
+================================================================================
+`;
+
 exports[`not-react.ts 1`] = `
 ====================================options=====================================
 parsers: ["typescript"]
@@ -103,15 +163,99 @@ printWidth: 80
 ================================================================================
 `;
 
+exports[`type-parameters.tsx 1`] = `
+====================================options=====================================
+parsers: ["typescript"]
+printWidth: 80
+                                                                                | printWidth
+=====================================input======================================
+const functionName1 = <T,>(arg) => false;
+const functionName2 = <T extends any>(arg) => false;
+const functionName3 = <T, S>(arg) => false;
+
+function functionName4<T>() {
+  return false;
+}
+
+functionName5<T>();
+
+interface Interface1<T> {
+  one: "one";
+}
+
+interface Interface2 {
+  two: Two<T>;
+}
+
+type Type1<T> = "type1";
+
+type Type2 = Two<T>;
+
+=====================================output=====================================
+const functionName1 = <T,>(arg) => false;
+const functionName2 = <T extends any>(arg) => false;
+const functionName3 = <T, S>(arg) => false;
+
+function functionName4<T>() {
+  return false;
+}
+
+functionName5<T>();
+
+interface Interface1<T> {
+  one: "one";
+}
+
+interface Interface2 {
+  two: Two<T>;
+}
+
+type Type1<T> = "type1";
+
+type Type2 = Two<T>;
+
+================================================================================
+`;
+
 exports[`url.tsx 1`] = `
 ====================================options=====================================
 parsers: ["typescript"]
 printWidth: 80
                                                                                 | printWidth
 =====================================input======================================
-const link = <a href="example.com">http://example.com</a>
+const link = <a href="example.com">http://example.com</a>;
+
+const first = <div>http://example.com</div>;
+
+ const second = <>http://example.com</>;
+
+ const third = <div><br />http://example.com</div>;
+
+ const fourth = <div><span></span>http://example.com</div>;
+
+ const fifth = <div>{}http://example.com</div>;
+
 =====================================output=====================================
 const link = <a href="example.com">http://example.com</a>;
+
+const first = <div>http://example.com</div>;
+
+const second = <>http://example.com</>;
+
+const third = (
+  <div>
+    <br />
+    http://example.com
+  </div>
+);
+
+const fourth = (
+  <div>
+    <span></span>http://example.com
+  </div>
+);
+
+const fifth = <div>{}http://example.com</div>;
 
 ================================================================================
 `;
