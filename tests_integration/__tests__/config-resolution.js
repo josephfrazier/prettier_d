@@ -25,6 +25,12 @@ describe("accepts configuration from --config", () => {
   });
 });
 
+describe("resolves external configuration from package.json", () => {
+  runPrettier("cli/config/", ["external-config/index.js"]).test({
+    status: 0
+  });
+});
+
 describe("resolves configuration file with --find-config-path file", () => {
   runPrettier("cli/config/", ["--find-config-path", "no-config/file.js"]).test({
     status: 0
@@ -75,12 +81,12 @@ describe("CLI overrides take precedence", () => {
 
 test("API resolveConfig with no args", () => {
   return prettier.resolveConfig().then(result => {
-    expect(result).toBeNull();
+    expect(result).toEqual({});
   });
 });
 
 test("API resolveConfig.sync with no args", () => {
-  expect(prettier.resolveConfig.sync()).toBeNull();
+  expect(prettier.resolveConfig.sync()).toEqual({});
 });
 
 test("API resolveConfig with file arg", () => {
@@ -226,6 +232,15 @@ test("API clearConfigCache", () => {
   expect(() => prettier.clearConfigCache()).not.toThrowError();
 });
 
+test("API resolveConfig overrides work with dotfiles", () => {
+  const folder = path.join(__dirname, "../cli/config/dot-overrides");
+  return expect(
+    prettier.resolveConfig(path.join(folder, ".foo.json"))
+  ).resolves.toMatchObject({
+    tabWidth: 4
+  });
+});
+
 test("API resolveConfig.sync overrides work with absolute paths", () => {
   // Absolute path
   const file = path.join(__dirname, "../cli/config/filepath/subfolder/file.js");
@@ -260,5 +275,13 @@ test("API resolveConfig resolves relative path values based on config filepath",
   expect(prettier.resolveConfig.sync(`${currentDir}/index.js`)).toMatchObject({
     plugins: [path.join(parentDir, "path-to-plugin")],
     pluginSearchDirs: [path.join(parentDir, "path-to-plugin-search-dir")]
+  });
+});
+
+test("API resolveConfig de-references to an external module", () => {
+  const currentDir = path.join(__dirname, "../cli/config/external-config");
+  expect(prettier.resolveConfig.sync(`${currentDir}/index.js`)).toEqual({
+    printWidth: 77,
+    semi: false
   });
 });

@@ -39,16 +39,14 @@ function resolveParser(opts, parsers) {
   }
 
   if (typeof opts.parser === "string") {
-    if (parsers.hasOwnProperty(opts.parser)) {
+    if (Object.prototype.hasOwnProperty.call(parsers, opts.parser)) {
       return parsers[opts.parser];
     }
 
     /* istanbul ignore next */
     if (process.env.PRETTIER_TARGET === "universal") {
       throw new ConfigError(
-        `Couldn't resolve parser "${
-          opts.parser
-        }". Parsers must be explicitly added to the standalone bundle.`
+        `Couldn't resolve parser "${opts.parser}". Parsers must be explicitly added to the standalone bundle.`
       );
     } else {
       try {
