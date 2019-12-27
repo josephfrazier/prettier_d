@@ -1,13 +1,13 @@
 {
-  "name": "prettier",
+  "name": "prettier_d",
   "version": "1.19.1",
   "description": "Prettier is an opinionated code formatter",
   "bin": {
     "prettier": "./bin/prettier.js",
     "prettier_d": "bin/prettier_d.js"
   },
-  "repository": "prettier/prettier",
-  "homepage": "https://prettier.io",
+  "repository": "josephfrazier/prettier_d",
+  "homepage": "https://github.com/josephfrazier/prettier_d",
   "author": "James Long",
   "contributors": [
     "Maximilian Antoni <mail@maxantoni.de> (http://maxantoni.de/)",
