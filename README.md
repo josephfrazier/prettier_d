@@ -50,7 +50,7 @@ is formatted. Subsequent invocations are super fast.
 
 The first time you use `prettier_d`, a little server is started in the background
 and bound to a random port. The port number is stored along with [a
-token][change401] in `~/.prettier_d`. You can then run `prettier_d` commands the
+token][change401] in `prettier_d/lib/.prettier_d`. You can then run `prettier_d` commands the
 same way you would use `prettier` and it will delegate to the background server.
 
 ## Commands
@@ -72,7 +72,7 @@ Available commands:
   is not yet running, it is started.
 
 `prettier_d` will select a free port automatically and store the port number
-along with an access token in `~/.prettier_d`.
+along with an access token in `prettier_d/lib/.prettier_d`.
 
 Type `prettier_d --help` to see the supported `prettier` options.
 
