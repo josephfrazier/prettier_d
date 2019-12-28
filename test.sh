@@ -10,10 +10,6 @@ file=./prettier.js
 $prettier stop
 $prettier start
 
-# Grab the required info for netcat
-PORT=`cat ~/.prettier_d | cut -d" " -f1`
-TOKEN=`cat ~/.prettier_d | cut -d" " -f2`
-
 # Make sure the fixture hasn't changed
 md5sum $file | grep f75b2b44fd861a20b69f9a3e1960e419 >/dev/null
 
