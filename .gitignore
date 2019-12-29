@@ -4,6 +4,7 @@
 *.log
 /errors
 /test.*
+lib/.prettier_d
 /.vscode
 /dist
 /website/node_modules
