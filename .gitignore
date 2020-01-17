@@ -4,6 +4,7 @@
 *.log
 /errors
 /test.*
+/.prettier_d
 lib/.prettier_d
 /.vscode
 /dist
