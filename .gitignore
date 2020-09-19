@@ -3,7 +3,7 @@
 /scripts/release/node_modules
 *.log
 /errors
-/test.*
+/test*.*
 /.prettier_d
 lib/.prettier_d
 /.vscode
@@ -14,6 +14,6 @@ lib/.prettier_d
 /website/static/playground.js
 /website/static/lib
 .DS_Store
-coverage
+/coverage
 .idea
 package-lock.json

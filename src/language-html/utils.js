@@ -1,17 +1,40 @@
 "use strict";
 
+const htmlTagNames = require("html-tag-names");
+const htmlElementAttributes = require("html-element-attributes");
+const { getParserName, isFrontMatterNode } = require("../common/util");
 const {
   CSS_DISPLAY_TAGS,
   CSS_DISPLAY_DEFAULT,
   CSS_WHITE_SPACE_TAGS,
-  CSS_WHITE_SPACE_DEFAULT
+  CSS_WHITE_SPACE_DEFAULT,
 } = require("./constants.evaluate");
-
-const htmlTagNames = require("html-tag-names");
-const htmlElementAttributes = require("html-element-attributes");
 
 const HTML_TAGS = arrayToMap(htmlTagNames);
 const HTML_ELEMENT_ATTRIBUTES = mapObject(htmlElementAttributes, arrayToMap);
+
+// https://infra.spec.whatwg.org/#ascii-whitespace
+const HTML_WHITESPACE = new Set(["\t", "\n", "\f", "\r", " "]);
+const htmlTrimStart = (string) => string.replace(/^[\t\n\f\r ]+/, "");
+const htmlTrimEnd = (string) => string.replace(/[\t\n\f\r ]+$/, "");
+const htmlTrim = (string) => htmlTrimStart(htmlTrimEnd(string));
+const htmlTrimLeadingBlankLines = (string) =>
+  string.replace(/^[\t\f\r ]*?\n/g, "");
+const htmlTrimPreserveIndentation = (string) =>
+  htmlTrimLeadingBlankLines(htmlTrimEnd(string));
+const splitByHtmlWhitespace = (string) => string.split(/[\t\n\f\r ]+/);
+const getLeadingHtmlWhitespace = (string) => string.match(/^[\t\n\f\r ]*/)[0];
+const getLeadingAndTrailingHtmlWhitespace = (string) => {
+  const [, leadingWhitespace, text, trailingWhitespace] = string.match(
+    /^([\t\n\f\r ]*)([\S\s]*?)([\t\n\f\r ]*)$/
+  );
+  return {
+    leadingWhitespace,
+    trailingWhitespace,
+    text,
+  };
+};
+const hasHtmlWhitespace = (string) => /[\t\n\f\r ]/.test(string);
 
 function arrayToMap(array) {
   const map = Object.create(null);
@@ -30,15 +53,6 @@ function mapObject(object, fn) {
 }
 
 function shouldPreserveContent(node, options) {
-  if (
-    node.type === "element" &&
-    node.fullName === "template" &&
-    node.attrMap.lang &&
-    node.attrMap.lang !== "html"
-  ) {
-    return true;
-  }
-
   // unterminated node in ie conditional comment
   // e.g. <!--[if lt IE 9]><html><![endif]-->
   if (
@@ -56,29 +70,20 @@ function shouldPreserveContent(node, options) {
     return true;
   }
 
-  // top-level elements (excluding <template>, <style> and <script>) in Vue SFC are considered custom block
-  // custom blocks can be written in other languages so we should preserve them to not break the code
-  if (
-    options.parser === "vue" &&
-    node.type === "element" &&
-    node.parent.type === "root" &&
-    [
-      "template",
-      "style",
-      "script",
-      // vue parser can be used for vue dom template as well, so we should still format top-level <html>
-      "html"
-    ].indexOf(node.fullName) === -1
-  ) {
-    return true;
-  }
-
   // TODO: handle non-text children in <pre>
   if (
     isPreLikeNode(node) &&
     node.children.some(
-      child => child.type !== "text" && child.type !== "interpolation"
+      (child) => child.type !== "text" && child.type !== "interpolation"
     )
+  ) {
+    return true;
+  }
+
+  if (
+    isVueNonHtmlBlock(node, options) &&
+    !isScriptLikeTag(node) &&
+    node.type !== "interpolation"
   ) {
     return true;
   }
@@ -87,10 +92,12 @@ function shouldPreserveContent(node, options) {
 }
 
 function hasPrettierIgnore(node) {
-  if (node.type === "attribute" || isTextLikeNode(node)) {
+  /* istanbul ignore next */
+  if (node.type === "attribute") {
     return false;
   }
 
+  /* istanbul ignore next */
   if (!node.parent) {
     return false;
   }
@@ -131,12 +138,10 @@ function isScriptLikeTag(node) {
     node.type === "element" &&
     (node.fullName === "script" ||
       node.fullName === "style" ||
-      node.fullName === "svg:style")
+      node.fullName === "svg:style" ||
+      (isUnknownNamespace(node) &&
+        (node.name === "script" || node.name === "style")))
   );
-}
-
-function isFrontMatterNode(node) {
-  return node.type === "yaml" || node.type === "toml";
 }
 
 function canHaveInterpolation(node) {
@@ -155,7 +160,7 @@ function isIndentationSensitiveNode(node) {
   return getNodeCssStyleWhiteSpace(node).startsWith("pre");
 }
 
-function isLeadingSpaceSensitiveNode(node) {
+function isLeadingSpaceSensitiveNode(node, options) {
   const isLeadingSpaceSensitive = _isLeadingSpaceSensitiveNode();
 
   if (
@@ -194,7 +199,9 @@ function isLeadingSpaceSensitiveNode(node) {
     if (
       !node.prev &&
       (node.parent.type === "root" ||
+        (isPreLikeNode(node) && node.parent) ||
         isScriptLikeTag(node.parent) ||
+        isVueCustomBlock(node.parent, options) ||
         !isFirstChildLeadingSpaceSensitiveCssDisplay(node.parent.cssDisplay))
     ) {
       return false;
@@ -211,7 +218,7 @@ function isLeadingSpaceSensitiveNode(node) {
   }
 }
 
-function isTrailingSpaceSensitiveNode(node) {
+function isTrailingSpaceSensitiveNode(node, options) {
   if (isFrontMatterNode(node)) {
     return false;
   }
@@ -235,7 +242,9 @@ function isTrailingSpaceSensitiveNode(node) {
   if (
     !node.next &&
     (node.parent.type === "root" ||
+      (isPreLikeNode(node) && node.parent) ||
       isScriptLikeTag(node.parent) ||
+      isVueCustomBlock(node.parent, options) ||
       !isLastChildTrailingSpaceSensitiveCssDisplay(node.parent.cssDisplay))
   ) {
     return false;
@@ -262,6 +271,7 @@ function forceNextEmptyLine(node) {
   return (
     isFrontMatterNode(node) ||
     (node.next &&
+      node.sourceSpan.end &&
       node.sourceSpan.end.line + 1 < node.next.sourceSpan.start.line)
   );
 }
@@ -272,10 +282,11 @@ function forceBreakContent(node) {
     forceBreakChildren(node) ||
     (node.type === "element" &&
       node.children.length !== 0 &&
-      (["body", "script", "style"].indexOf(node.name) !== -1 ||
-        node.children.some(child => hasNonTextChild(child)))) ||
+      (["body", "script", "style"].includes(node.name) ||
+        node.children.some((child) => hasNonTextChild(child)))) ||
     (node.firstChild &&
       node.firstChild === node.lastChild &&
+      node.firstChild.type !== "text" &&
       hasLeadingLineBreak(node.firstChild) &&
       (!node.lastChild.isTrailingSpaceSensitive ||
         hasTrailingLineBreak(node.lastChild)))
@@ -287,7 +298,7 @@ function forceBreakChildren(node) {
   return (
     node.type === "element" &&
     node.children.length !== 0 &&
-    (["html", "head", "ul", "ol", "select"].indexOf(node.name) !== -1 ||
+    (["html", "head", "ul", "ol", "select"].includes(node.name) ||
       (node.cssDisplay.startsWith("table") && node.cssDisplay !== "table-cell"))
   );
 }
@@ -328,7 +339,8 @@ function hasTrailingLineBreak(node) {
     (node.next
       ? node.next.sourceSpan.start.line > node.sourceSpan.end.line
       : node.parent.type === "root" ||
-        node.parent.endSourceSpan.start.line > node.sourceSpan.end.line)
+        (node.parent.endSourceSpan &&
+          node.parent.endSourceSpan.start.line > node.sourceSpan.end.line))
   );
 }
 
@@ -339,7 +351,7 @@ function preferHardlineAsSurroundingSpaces(node) {
     case "directive":
       return true;
     case "element":
-      return ["script", "select"].indexOf(node.name) !== -1;
+      return ["script", "select"].includes(node.name);
   }
   return false;
 }
@@ -349,60 +361,75 @@ function getLastDescendant(node) {
 }
 
 function hasNonTextChild(node) {
-  return node.children && node.children.some(child => child.type !== "text");
+  return node.children && node.children.some((child) => child.type !== "text");
 }
 
-function inferScriptParser(node) {
+function _inferScriptParser(node) {
+  const { type, lang } = node.attrMap;
+  if (
+    type === "module" ||
+    type === "text/javascript" ||
+    type === "text/babel" ||
+    type === "application/javascript" ||
+    lang === "jsx"
+  ) {
+    return "babel";
+  }
+
+  if (type === "application/x-typescript" || lang === "ts" || lang === "tsx") {
+    return "typescript";
+  }
+
+  if (type === "text/markdown") {
+    return "markdown";
+  }
+
+  if (type === "text/html") {
+    return "html";
+  }
+
+  if (type && (type.endsWith("json") || type.endsWith("importmap"))) {
+    return "json";
+  }
+
+  if (type === "text/x-handlebars-template") {
+    return "glimmer";
+  }
+}
+
+function inferStyleParser(node) {
+  const { lang } = node.attrMap;
+  if (!lang || lang === "postcss" || lang === "css") {
+    return "css";
+  }
+
+  if (lang === "scss") {
+    return "scss";
+  }
+
+  if (lang === "less") {
+    return "less";
+  }
+}
+
+function inferScriptParser(node, options) {
   if (node.name === "script" && !node.attrMap.src) {
-    if (
-      (!node.attrMap.lang && !node.attrMap.type) ||
-      node.attrMap.type === "module" ||
-      node.attrMap.type === "text/javascript" ||
-      node.attrMap.type === "text/babel" ||
-      node.attrMap.type === "application/javascript"
-    ) {
+    if (!node.attrMap.lang && !node.attrMap.type) {
       return "babel";
     }
-
-    if (
-      node.attrMap.type === "application/x-typescript" ||
-      node.attrMap.lang === "ts" ||
-      node.attrMap.lang === "tsx"
-    ) {
-      return "typescript";
-    }
-
-    if (node.attrMap.type === "text/markdown") {
-      return "markdown";
-    }
-
-    if (
-      node.attrMap.type.endsWith("json") ||
-      node.attrMap.type.endsWith("importmap")
-    ) {
-      return "json";
-    }
+    return _inferScriptParser(node);
   }
 
   if (node.name === "style") {
-    if (
-      !node.attrMap.lang ||
-      node.attrMap.lang === "postcss" ||
-      node.attrMap.lang === "css"
-    ) {
-      return "css";
-    }
-
-    if (node.attrMap.lang === "scss") {
-      return "scss";
-    }
-
-    if (node.attrMap.lang === "less") {
-      return "less";
-    }
+    return inferStyleParser(node);
   }
 
-  return null;
+  if (options && isVueNonHtmlBlock(node, options)) {
+    return (
+      _inferScriptParser(node) ||
+      (!("src" in node.attrMap) && getParserName(node.attrMap.lang, options))
+    );
+  }
 }
 
 function isBlockLikeCssDisplay(cssDisplay) {
@@ -437,7 +464,7 @@ function isPreLikeNode(node) {
   return getNodeCssStyleWhiteSpace(node).startsWith("pre");
 }
 
-function countParents(path, predicate = () => true) {
+function countParents(path, predicate) {
   let counter = 0;
   for (let i = path.stack.length - 1; i >= 0; i--) {
     const value = path.stack[i];
@@ -478,7 +505,7 @@ function getNodeCssStyleDisplay(node, options) {
 
   let isInSvgForeignObject = false;
   if (node.type === "element" && node.namespace === "svg") {
-    if (hasParent(node, parent => parent.fullName === "svg:foreignObject")) {
+    if (hasParent(node, (parent) => parent.fullName === "svg:foreignObject")) {
       isInSvgForeignObject = true;
     } else {
       return node.name === "svg" ? "inline-block" : "block";
@@ -490,20 +517,39 @@ function getNodeCssStyleDisplay(node, options) {
       return "inline";
     case "ignore":
       return "block";
-    default:
+    default: {
+      // See https://github.com/prettier/prettier/issues/8151
+      if (
+        options.parser === "vue" &&
+        node.parent &&
+        node.parent.type === "root"
+      ) {
+        return "block";
+      }
       return (
         (node.type === "element" &&
-          (!node.namespace || isInSvgForeignObject) &&
+          (!node.namespace ||
+            isInSvgForeignObject ||
+            isUnknownNamespace(node)) &&
           CSS_DISPLAY_TAGS[node.name]) ||
         CSS_DISPLAY_DEFAULT
       );
+    }
   }
+}
+
+function isUnknownNamespace(node) {
+  return (
+    node.type === "element" &&
+    !node.hasExplicitNamespace &&
+    !["html", "svg"].includes(node.namespace)
+  );
 }
 
 function getNodeCssStyleWhiteSpace(node) {
   return (
     (node.type === "element" &&
-      !node.namespace &&
+      (!node.namespace || isUnknownNamespace(node)) &&
       CSS_WHITE_SPACE_TAGS[node.name]) ||
     CSS_WHITE_SPACE_DEFAULT
   );
@@ -517,11 +563,11 @@ function getMinIndentation(text) {
       continue;
     }
 
-    if (/\S/.test(lineText[0])) {
+    if (!HTML_WHITESPACE.has(lineText[0])) {
       return 0;
     }
 
-    const indentation = lineText.match(/^\s*/)[0].length;
+    const indentation = getLeadingHtmlWhitespace(lineText).length;
 
     if (lineText.length === indentation) {
       continue;
@@ -540,43 +586,8 @@ function dedentString(text, minIndent = getMinIndentation(text)) {
     ? text
     : text
         .split("\n")
-        .map(lineText => lineText.slice(minIndent))
+        .map((lineText) => lineText.slice(minIndent))
         .join("\n");
-}
-
-function normalizeParts(parts) {
-  const newParts = [];
-
-  const restParts = parts.slice();
-  while (restParts.length !== 0) {
-    const part = restParts.shift();
-
-    if (!part) {
-      continue;
-    }
-
-    if (part.type === "concat") {
-      Array.prototype.unshift.apply(restParts, part.parts);
-      continue;
-    }
-
-    if (
-      newParts.length !== 0 &&
-      typeof newParts[newParts.length - 1] === "string" &&
-      typeof part === "string"
-    ) {
-      newParts.push(newParts.pop() + part);
-      continue;
-    }
-
-    newParts.push(part);
-  }
-
-  return newParts;
-}
-
-function identity(x) {
-  return x;
 }
 
 function shouldNotPrintClosingTag(node, options) {
@@ -601,9 +612,38 @@ function unescapeQuoteEntities(text) {
   return text.replace(/&apos;/g, "'").replace(/&quot;/g, '"');
 }
 
+// top-level elements (excluding <template>, <style> and <script>) in Vue SFC are considered custom block
+// See https://vue-loader.vuejs.org/spec.html for detail
+const vueRootElementsSet = new Set(["template", "style", "script"]);
+function isVueCustomBlock(node, options) {
+  return isVueSfcBlock(node, options) && !vueRootElementsSet.has(node.fullName);
+}
+
+function isVueSfcBlock(node, options) {
+  return (
+    options.parser === "vue" &&
+    node.type === "element" &&
+    node.parent.type === "root" &&
+    node.fullName.toLowerCase() !== "html"
+  );
+}
+
+function isVueNonHtmlBlock(node, options) {
+  return (
+    isVueSfcBlock(node, options) &&
+    (isVueCustomBlock(node, options) ||
+      (node.attrMap.lang && node.attrMap.lang !== "html"))
+  );
+}
+
 module.exports = {
   HTML_ELEMENT_ATTRIBUTES,
   HTML_TAGS,
+  htmlTrim,
+  htmlTrimPreserveIndentation,
+  splitByHtmlWhitespace,
+  hasHtmlWhitespace,
+  getLeadingAndTrailingHtmlWhitespace,
   canHaveInterpolation,
   countChars,
   countParents,
@@ -616,10 +656,10 @@ module.exports = {
   getNodeCssStyleWhiteSpace,
   getPrettierIgnoreAttributeCommentData,
   hasPrettierIgnore,
-  identity,
   inferScriptParser,
+  isVueCustomBlock,
+  isVueNonHtmlBlock,
   isDanglingSpaceSensitiveNode,
-  isFrontMatterNode,
   isIndentationSensitiveNode,
   isLeadingSpaceSensitiveNode,
   isPreLikeNode,
@@ -627,10 +667,10 @@ module.exports = {
   isTextLikeNode,
   isTrailingSpaceSensitiveNode,
   isWhitespaceSensitiveNode,
-  normalizeParts,
+  isUnknownNamespace,
   preferHardlineAsLeadingSpaces,
   preferHardlineAsTrailingSpaces,
   shouldNotPrintClosingTag,
   shouldPreserveContent,
-  unescapeQuoteEntities
+  unescapeQuoteEntities,
 };

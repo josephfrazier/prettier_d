@@ -1,40 +1,27 @@
 "use strict";
 
-const fs = require("fs");
 const path = require("path");
 
 const editorconfig = require("editorconfig");
 const mem = require("mem");
 const editorConfigToPrettier = require("editorconfig-to-prettier");
-const findProjectRoot = require("find-project-root");
+const findProjectRoot = require("./find-project-root");
 
-const maybeParse = (filePath, config, parse) => {
-  // findProjectRoot will throw an error if we pass a nonexistent directory to
-  // it, which is possible, for example, when the path is given via
-  // --stdin-filepath. So, first, traverse up until we find an existing
-  // directory.
-  let dirPath = path.dirname(path.resolve(filePath));
-  const fsRoot = path.parse(dirPath).root;
-  while (dirPath !== fsRoot && !fs.existsSync(dirPath)) {
-    dirPath = path.dirname(dirPath);
-  }
-  const root = findProjectRoot(dirPath);
-  return filePath && parse(filePath, { root });
-};
+const jsonStringifyMem = (fn) => mem(fn, { cacheKey: JSON.stringify });
 
-const editorconfigAsyncNoCache = (filePath, config) => {
-  return Promise.resolve(maybeParse(filePath, config, editorconfig.parse)).then(
-    editorConfigToPrettier
-  );
-};
-const editorconfigAsyncWithCache = mem(editorconfigAsyncNoCache);
+const maybeParse = (filePath, parse) =>
+  filePath &&
+  parse(filePath, {
+    root: findProjectRoot(path.dirname(path.resolve(filePath))),
+  });
 
-const editorconfigSyncNoCache = (filePath, config) => {
-  return editorConfigToPrettier(
-    maybeParse(filePath, config, editorconfig.parseSync)
-  );
-};
-const editorconfigSyncWithCache = mem(editorconfigSyncNoCache);
+const editorconfigAsyncNoCache = async (filePath) =>
+  editorConfigToPrettier(await maybeParse(filePath, editorconfig.parse));
+const editorconfigAsyncWithCache = jsonStringifyMem(editorconfigAsyncNoCache);
+
+const editorconfigSyncNoCache = (filePath) =>
+  editorConfigToPrettier(maybeParse(filePath, editorconfig.parseSync));
+const editorconfigSyncWithCache = jsonStringifyMem(editorconfigSyncNoCache);
 
 function getLoadFunction(opts) {
   if (!opts.editorconfig) {
@@ -55,5 +42,5 @@ function clearCache() {
 
 module.exports = {
   getLoadFunction,
-  clearCache
+  clearCache,
 };
