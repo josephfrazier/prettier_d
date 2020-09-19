@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail # bash "strict mode"
+set -xeuo pipefail # bash "strict mode"
 
 pushd test >/dev/null
 
