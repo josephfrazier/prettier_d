@@ -119,6 +119,10 @@ jobs:
           name: dist
           path: dist
 
+      - name: Install md5sum (macOS)
+        if: matrix.os == 'macos-latest'
+        run: brew install md5sha1sum
+
       - name: Run Tests (macOS)
         if: matrix.os == 'macos-latest'
         run: yarn test:dist --maxWorkers=4
