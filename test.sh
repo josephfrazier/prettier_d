@@ -16,6 +16,9 @@ md5sum $file | grep f75b2b44fd861a20b69f9a3e1960e419 >/dev/null
 # Format it using stdin and make sure the output has been formatted
 cat $file | $prettier --parser babel | md5sum | grep 750573a1ced7ec47055a51584e1fcd6e >/dev/null
 
+# Try a different stdin and make sure the output is different
+cat ./install-service-worker.js | $prettier --parser babel | md5sum | grep d85209acfe81f406233068b6530c86aa >/dev/null
+
 # Ensure that --list-different prints the filename
 ($prettier --list-different $file || true) | grep $(basename $file) >/dev/null
 
