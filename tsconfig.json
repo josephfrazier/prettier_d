@@ -44,6 +44,9 @@
     "tests/",
     "tests_config/",
     "tests_integration/",
-    "website/"
+    "website/",
+    // prettier_d stuff
+    "lib/",
+    "test/",
   ]
 }
