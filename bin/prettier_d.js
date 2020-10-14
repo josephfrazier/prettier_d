@@ -22,7 +22,7 @@ if (cmd === "restart") {
 }
 
 const commands = ["stop", "status", "restart"];
-if (commands.indexOf(cmd) > -1) {
+if (commands.includes(cmd)) {
   client[cmd](process.argv.slice(3));
   return;
 }
