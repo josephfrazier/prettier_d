@@ -389,6 +389,7 @@ function formatStdin(context) {
 
   getStream(process.stdin)
     .then((input) => {
+      console.log(JSON.stringify({srcCliUtilFormatStdin: {input}}))
       if (
         relativeFilepath &&
         ignorer.ignores(fixWindowsSlashes(relativeFilepath))

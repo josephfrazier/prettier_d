@@ -9,6 +9,7 @@ const prettier = require("../index");
 const util = require("./util");
 
 function run(args) {
+  console.log(JSON.stringify({srcCliRun: {args}}))
   const context = util.createContext(args);
 
   try {
@@ -69,6 +70,7 @@ function run(args) {
     } else if (context.argv["file-info"]) {
       util.logFileInfoOrDie(context);
     } else if (useStdin) {
+      console.log(JSON.stringify({srcCliRun: {useStdin}}))
       util.formatStdin(context);
     } else if (hasFilePatterns) {
       util.formatFiles(context);
