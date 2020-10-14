@@ -20,6 +20,7 @@ if (!global.jest) {
     resetModules: () => {
       delete require.cache[require.resolve(prettierCli)];
       delete require.cache[require.resolve('../src/cli')];
+      delete require.cache[require.resolve(thirdParty)];
     },
     restoreAllMocks: () => sinon.restore(),
   };
@@ -88,6 +89,8 @@ function runPrettier(dir, args, options) {
   process.stdout.isTTY = !!options.stdoutIsTTY;
   process.argv = ["path/to/node", "path/to/prettier/bin"].concat(args);
 
+  jest.resetModules();
+
   // We cannot use `jest.setMock("get-stream", impl)` here, because in the
   // production build everything is bundled into one file so there is no
   // "get-stream" module to mock.
@@ -125,8 +128,7 @@ function runPrettier(dir, args, options) {
     .mockImplementation(() => process.cwd());
 
   try {
-    jest.resetModules();
-    delete require.cache[require.resolve(prettierCli)]
+    // jest.resetModules();
     console.log(Object.keys(require.cache).length)
     console.log(require.resolve(prettierCli) in require.cache)
     console.log('/Users/josephfrazier/workspace/prettier_d/src/cli/index.js' in require.cache)
@@ -136,8 +138,7 @@ function runPrettier(dir, args, options) {
     console.log(require.resolve(prettierCli) in require.cache)
     console.log('/Users/josephfrazier/workspace/prettier_d/src/cli/index.js' in require.cache)
 
-    jest.resetModules();
-    delete require.cache[require.resolve(prettierCli)]
+    // jest.resetModules();
 
     status = (status === undefined ? process.exitCode : status) || 0;
   } catch (error) {
