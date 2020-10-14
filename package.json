@@ -94,7 +94,7 @@
     "sinon": "7.2.2",
     "string-width": "4.2.0",
     "strip-ansi": "5.2.0",
-    "supports-color": "^4.2.1",
+    "supports-color": "4.5.0",
     "synchronous-promise": "2.0.10",
     "typescript": "4.0.2",
     "unicode-regex": "3.0.0",
