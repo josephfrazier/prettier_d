@@ -4,25 +4,27 @@ const fs = require("fs");
 // const mockStdin = require("mock-stdin");
 const path = require("path");
 const stripAnsi = require("strip-ansi");
-const sinon = require("sinon");
+// const sinon = require("sinon");
 const { SynchronousPromise } = require("synchronous-promise");
 const { prettierCli, thirdParty } = require("./env");
 
 if (!global.jest) {
+  const jestMock = require('jest-mock');
   global.jest = {
     spyOn: (object, method) => {
-      return {
-        mockImplementation: (mockImpl) => {
-          sinon.replace(object, method, sinon.fake(mockImpl));
-        },
-      };
+      return jestMock.spyOn(object, method)
+      // return {
+      //   mockImplementation: (mockImpl) => {
+      //     sinon.replace(object, method, sinon.fake(mockImpl));
+      //   },
+      // };
     },
     resetModules: () => {
       delete require.cache[require.resolve(prettierCli)];
       delete require.cache[require.resolve('../src/cli')];
       delete require.cache[require.resolve(thirdParty)];
     },
-    restoreAllMocks: () => sinon.restore(),
+    restoreAllMocks: () => jestMock.restoreAllMocks(),
   };
 }
 
