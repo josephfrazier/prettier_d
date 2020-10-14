@@ -35,5 +35,5 @@ module.exports = () => {
 
   shell.exec(installCommand, { cwd: tmpDir });
 
-  return path.join(tmpDir, "node_modules/prettier");
+  return path.join(tmpDir, "node_modules/prettier_d");
 };
