@@ -24,6 +24,6 @@ tmp=.write.test.js
 cp $file $tmp && $prettier --write $tmp && $prettier --list-different $tmp | wc -c | grep '\<0$' >/dev/null && rm $tmp
 
 # Verify that multiple files are supported
-$prettier $file ./install-service-worker.js | md5sum | grep 3a35d94b8e9c752581de57aaecd86862 >/dev/null
+$prettier $file ./install-service-worker.js | md5sum | grep 48264811d11f26a852735d4fe1f8c1f4 >/dev/null
 
 popd >/dev/null
