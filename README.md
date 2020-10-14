@@ -1,21 +1,20 @@
-# prettier\_d
+# prettier_d
 
 [![Build Status](https://travis-ci.org/josephfrazier/prettier_d.svg?branch=master)](https://travis-ci.org/josephfrazier/prettier_d)
 [![SemVer]](http://semver.org)
-[![License]](https://github.com/josephfrazier/prettier\_d.js/blob/master/LICENSE)
+[![License]](https://github.com/josephfrazier/prettier_d.js/blob/master/LICENSE)
 
 Makes [prettier] the fastest formatter on the planet.
 
-Table of Contents
-=================
+# Table of Contents
 
-* ["But prettier is pretty fast already, right?"](#but-prettier-is-pretty-fast-already-right)
-* [Install](#install)
-* [Usage](#usage)
-* [How does this work?](#how-does-this-work)
-* [Commands](#commands)
-* [Editor integration](#editor-integration)
-   * [Real-time formatting in Vim](#real-time-formatting-in-vim)
+- ["But prettier is pretty fast already, right?"](#but-prettier-is-pretty-fast-already-right)
+- [Install](#install)
+- [Usage](#usage)
+- [How does this work?](#how-does-this-work)
+- [Commands](#commands)
+- [Editor integration](#editor-integration)
+  - [Real-time formatting in Vim](#real-time-formatting-in-vim)
 
 ## "But prettier is pretty fast already, right?"
 
@@ -100,13 +99,13 @@ Then, make sure you've started the server: `prettier_d start`.
 
 This will format your code:
 
-* before each save
-* whenever text is changed in normal mode
-* whenever you leave insert mode
+- before each save
+- whenever text is changed in normal mode
+- whenever you leave insert mode
 
-[Neoformat]: https://github.com/sbdchd/neoformat
-[SemVer]: http://img.shields.io/:semver-%E2%9C%93-brightgreen.svg
-[License]: http://img.shields.io/npm/l/prettier_d.svg
+[neoformat]: https://github.com/sbdchd/neoformat
+[semver]: http://img.shields.io/:semver-%E2%9C%93-brightgreen.svg
+[license]: http://img.shields.io/npm/l/prettier_d.svg
 [prettier]: https://github.com/prettier/prettier
 [change401]: https://github.com/josephfrazier/prettier_d/blob/master/CHANGES.md#401
 

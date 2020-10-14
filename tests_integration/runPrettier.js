@@ -11,13 +11,13 @@ if (!global.jest) {
   global.jest = {
     spyOn: (object, method) => {
       return {
-        mockImplementation: mockImpl => {
+        mockImplementation: (mockImpl) => {
           sinon.replace(object, method, sinon.fake(mockImpl));
-        }
+        },
       };
     },
     resetModules: () => delete require.cache[require.resolve(prettierCli)],
-    restoreAllMocks: () => sinon.restore()
+    restoreAllMocks: () => sinon.restore(),
   };
 }
 

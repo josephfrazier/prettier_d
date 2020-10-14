@@ -33,6 +33,6 @@ if (!require("supports-color")) {
   args.unshift("--no-color");
 }
 
-getStdin().then(text => {
+getStdin().then((text) => {
   client.lint(args, text);
 });

@@ -2,41 +2,41 @@
 
 ## Post-5.7.4
 
-* Become a fork of Prettier instead using whatever Prettier is installed separately
-* Remove custom option parsing, defer to Prettier instead
-* Stop versioning (install from GitHub to use)
-* Remove `prettier_dnc` script (use `prettier_d` directly instead)
+- Become a fork of Prettier instead using whatever Prettier is installed separately
+- Remove custom option parsing, defer to Prettier instead
+- Stop versioning (install from GitHub to use)
+- Remove `prettier_dnc` script (use `prettier_d` directly instead)
 
 ## 5.6.0
 
-* Add .editorconfig support to --pkg-conf option
-* Add `--keep-indentation` option
+- Add .editorconfig support to --pkg-conf option
+- Add `--keep-indentation` option
 
 ## 5.5.0
 
-* Parse `.prettierrc` for config as well as `package.json`
+- Parse `.prettierrc` for config as well as `package.json`
 
 ## 5.4.0
 
-* Add `prettier_dnc` script to streamline netcat usage
-* Add `--local-only` option/docs
-* Add `--pkg-conf` option for reading prettier config from nearest package.json
+- Add `prettier_dnc` script to streamline netcat usage
+- Add `--local-only` option/docs
+- Add `--pkg-conf` option for reading prettier config from nearest package.json
 
 ## 5.3.0
 
-* Add support for `--write` and `--list-different` options
-* Document --fallback and --json in --help message
+- Add support for `--write` and `--list-different` options
+- Document --fallback and --json in --help message
 
 ## 5.2.0
 
-* Make it possible to pipe a stream to netcat
-* Document unsupported `prettier` options
-* Improve `--help` message
+- Make it possible to pipe a stream to netcat
+- Document unsupported `prettier` options
+- Improve `--help` message
 
 ## 5.1.0
 
-* Improve CLI parity with `prettier`
-* Add `--json` and `--fallback` options.
+- Improve CLI parity with `prettier`
+- Add `--json` and `--fallback` options.
 
 ## 5.0.0
 

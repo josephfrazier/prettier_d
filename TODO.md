@@ -1,3 +1,3 @@
 # TODO
 
-* Figure out how to use prettier's test cases?
+- Figure out how to use prettier's test cases?

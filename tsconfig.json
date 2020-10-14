@@ -47,6 +47,6 @@
     "website/",
     // prettier_d stuff
     "lib/",
-    "test/",
+    "test/"
   ]
 }
