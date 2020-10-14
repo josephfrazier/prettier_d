@@ -2,7 +2,10 @@
   "name": "prettier_d",
   "version": "2.1.2",
   "description": "Prettier is an opinionated code formatter",
-  "bin": "./bin/prettier_d.js",
+  "bin": {
+    "prettier_d": "./bin/prettier_d.js",
+    "prettier": "./bin/prettier.js"
+  },
   "repository": "josephfrazier/prettier_d",
   "homepage": "https://github.com/josephfrazier/prettier_d",
   "author": "James Long",
