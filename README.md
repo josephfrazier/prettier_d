@@ -1,3 +1,5 @@
+# No longer maintained, try https://github.com/mikew/prettier_d_slim instead ([context](https://github.com/josephfrazier/prettier_d/issues/83#issuecomment-815362919))
+
 # prettier\_d
 
 [![Build Status](https://travis-ci.org/josephfrazier/prettier_d.svg?branch=master)](https://travis-ci.org/josephfrazier/prettier_d)
